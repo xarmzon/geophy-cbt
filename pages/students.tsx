@@ -70,8 +70,8 @@ const Students = () => {
         <h2 className="text-lg text-primary mb-5 font-bold">
           Students Management
         </h2>
-        <section className="shadow-md w-full md:w-1/5">
-          <form onSubmit={handleAddStudent}>
+        <section className="mb-5 p-5 shadow-md w-full md:w-1/5">
+          <form className="space-y-5" onSubmit={handleAddStudent}>
             <Input
               type="text"
               placeholder="Enter the student Full Name"
@@ -97,7 +97,9 @@ const Students = () => {
             <Input name="submit" type="submit" value={submitText} isBtn />
           </form>
         </section>
-        <section className="shadow-md w-full md:w-4/5">Data Table</section>
+        <section className="mt-3 p-2 shadow-md w-full md:w-4/5">
+          Data Table
+        </section>
       </DashboardLayout>
       ;
     </>
