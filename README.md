@@ -1,4 +1,4 @@
-# MSS UNILORIN CHAPTER MOCK EXAMINATION CBT(Computer Base Test WebApp)
+# MSSN UNILORIN CHAPTER MOCK EXAMINATION CBT(Computer Base Test WebApp)
 
 ## Designed and Crafted By
 
@@ -7,10 +7,6 @@ Xarmzon(Adelola Kayode Samson), A FullStack Developer using React, NextJs, VueJs
 ## Stack used
 
 Next.js + Tailwind CSS + Typescript
-
-## About the academy
-
-BEST Tutorial Plug on Mathematics, Physics, Chemistry, and Statistics Courses? Created To Tutor, Mentor, Guide, and Lead Students to Obtaining the Best Grades In Their Subjects/Courses...
 
 ## CONTACTS
 
