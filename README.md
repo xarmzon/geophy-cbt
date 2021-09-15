@@ -6,7 +6,7 @@ Xarmzon(Adelola Kayode Samson), A FullStack Developer using React, NextJs, VueJs
 
 ## Stack used
 
-Next.js + Tailwind CSS + Typescript
+Next.js + Tailwind CSS + Typescript + MongoDB
 
 ## CONTACTS
 
