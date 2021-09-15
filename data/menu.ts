@@ -3,6 +3,7 @@ import {
   HiOutlineChartPie,
   HiOutlineBookOpen,
   HiOutlineUserGroup,
+  HiOutlineChartSquareBar,
   HiOutlineUsers,
 } from "react-icons/hi";
 
@@ -27,9 +28,15 @@ export const menu: IMenu[] = [
     Icon: HiOutlineBookOpen,
   },
   {
+    link: ROUTES.STUDENTS,
+    for: USER_TYPES.ADMIN,
+    text: "Students",
+    Icon: HiOutlineUsers,
+  },
+  {
     link: ROUTES.RESULTS,
     for: USER_TYPES.ADMIN,
     text: "Results",
-    Icon: HiOutlineUsers,
+    Icon: HiOutlineChartSquareBar,
   },
 ];

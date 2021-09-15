@@ -19,6 +19,7 @@ export const USER_TYPES = {
 export const ROUTES = {
   DASHBOARD: "/dashboard",
   COURSES: "/courses",
+  STUDENTS: "/students",
   RESULTS: "/results",
   ADD_QUESTIONS: "/course/[id]/questions",
   EXAM: "/exam/[id]",
