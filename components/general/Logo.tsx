@@ -3,14 +3,14 @@ import Link from "next/link";
 
 const Logo = () => {
   return (
-    <div className="h-30 w-30">
+    <div className="h-20 w-20">
       <Link href="/">
         <a>
           <Image
             className="object-contain"
             src="/assets/images/logo.png"
-            height="501"
-            width="491"
+            height="301"
+            width="291"
           />
         </a>
       </Link>
