@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Logo = () => {
   return (
-    <div className="h-36 w-36">
+    <div className="h-40 w-40">
       <Link href="/">
         <a>
           <Image
