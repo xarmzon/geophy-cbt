@@ -1,4 +1,4 @@
-# dsa: De Scholars Academy Online CBT(Computer Base Test WebApp)
+# MSS UNILORIN CHAPTER MOCK EXAMINATION CBT(Computer Base Test WebApp)
 
 ## Designed and Crafted By
 
