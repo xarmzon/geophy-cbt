@@ -9,8 +9,8 @@ const Logo = () => {
           <Image
             className="object-contain"
             src="/assets/images/logo.png"
-            height="301"
-            width="291"
+            height="501"
+            width="491"
           />
         </a>
       </Link>
