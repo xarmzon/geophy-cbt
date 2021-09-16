@@ -324,7 +324,11 @@ const Students = () => {
                         id: d._id,
                         values: [
                           d.fullName,
+                          d.jamb,
+                          d.email,
                           d.phoneNumber,
+                          d.department,
+                          d.faculty,
                           dateformat(d.createdAt, "mediumDate"),
                         ],
                       })),

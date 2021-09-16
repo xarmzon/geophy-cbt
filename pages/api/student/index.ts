@@ -74,12 +74,12 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { fullName, phoneNumber, course } = req.body;
-  if (!fullName || !phoneNumber || !course)
+  const { jamb, phoneNumber, course } = req.body;
+  if (!jamb || !phoneNumber || !course)
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   const studentData = await Student.findOne({
-    fullName: formatFullName(fullName),
+    jamb,
     phoneNumber,
   });
   if (!studentData) {
