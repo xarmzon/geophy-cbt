@@ -15,7 +15,7 @@ export interface DataProps {
 }
 
 export interface FormDataProps {
-  fullName: DataProps;
+  jamb: DataProps;
   phoneNumber: DataProps;
   course: DataProps;
 }
@@ -30,7 +30,7 @@ const LoginForm = ({ courses }) => {
   const msgRef = useRef();
   const [submitText, setSubmitText] = useState<string>("Submit");
   const [formData, setFormData] = useState<FormDataProps>({
-    fullName: {
+    jamb: {
       error: "",
       value: "",
     },
@@ -58,7 +58,7 @@ const LoginForm = ({ courses }) => {
   const resetErrors = () => {
     setFormData((prev) => ({
       ...prev,
-      fullName: { ...prev.fullName, error: "" },
+      jamb: { ...prev.jamb, error: "" },
       phoneNumber: { ...prev.phoneNumber, error: "" },
       course: { ...prev.course, error: "" },
     }));
@@ -71,7 +71,7 @@ const LoginForm = ({ courses }) => {
         handleResMsg();
         resetErrors();
         const errors = validateStudentData({
-          fullName: formData.fullName.value,
+          jamb: formData.jamb.value,
           phoneNumber: formData.phoneNumber.value,
           course: formData.course.value,
         });
@@ -87,7 +87,7 @@ const LoginForm = ({ courses }) => {
           setSubmitText("Loading...");
           try {
             const { data } = await api.post(ROUTES.API.STUDENT, {
-              fullName: formData.fullName.value,
+              jamb: formData.jamb.value,
               phoneNumber: formData.phoneNumber.value,
               course: formData.course.value,
               type: "exam",
@@ -143,13 +143,13 @@ const LoginForm = ({ courses }) => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
         <Input
-          name="fullName"
-          value={formData.fullName.value}
-          error={formData.fullName.error}
+          name="jamb"
+          value={formData.jamb.value}
+          error={formData.jamb.error}
           showLabel
-          labelValue="Full Name"
-          minLength={7}
-          maxLength={50}
+          labelValue="JAMB Reg. No:"
+          minLength={10}
+          maxLength={10}
           onChange={(e) => {
             handleChange(e.target.name, e.target.value);
           }}

@@ -13,15 +13,15 @@ export interface IDataError {
   msg: string;
 }
 export interface IStudentData {
-  fullName: string;
+  jamb: string;
   phoneNumber: string;
   course: string;
 }
 
 export const validateStudentData = (data: IStudentData): IDataError[] => {
   let errors: IDataError[] = [];
-  if (!validFullName(data.fullName))
-    errors.push({ type: "fullName", msg: MESSAGES.FORM.FULL_NAME });
+  if (!validJAMB(data.jamb))
+    errors.push({ type: "jamb", msg: MESSAGES.FORM.JAMB_NUM });
 
   if (!validPhoneNumber(data.phoneNumber))
     errors.push({ type: "phoneNumber", msg: MESSAGES.FORM.PHONE_NUMBER });
@@ -41,6 +41,10 @@ export const validateRegForm = (formData: IRegUser): IDataError[] => {
   if (!validPassword(formData.password))
     errors.push({ type: "password", msg: MESSAGES.FORM.PASSWORD });
   return errors;
+};
+
+export const validJAMB = (jambN: string): boolean => {
+  return /^\d{8}[a-zA-Z]{2}$/.test(jambN);
 };
 
 export const validPhoneNumber = (phone: string): boolean => {

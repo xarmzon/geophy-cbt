@@ -103,8 +103,9 @@ export const MESSAGES = {
   METHOD_NOT_ALLOWED: "Sorry, Method not allowed or not yet supported",
   FORM: {
     FULL_NAME: `Invalid full name, please try again with minimum of ${ENTITY_NUMBERS.FULLNAME_MIN} and maximum of ${ENTITY_NUMBERS.FULLNAME_MAX} letters`,
-    USERNAME: `Invalid username supplied, please try again with minimum of ${ENTITY_NUMBERS.USERNAME_MIN} and maximum of ${ENTITY_NUMBERS.USERNAME_MAX} letters`,
     PHONE_NUMBER: `Invalid Nigeria phone number supplied`,
+    USERNAME: `Invalid username supplied, please try again with minimum of ${ENTITY_NUMBERS.USERNAME_MIN} and maximum of ${ENTITY_NUMBERS.USERNAME_MAX} letters`,
+    JAMB_NUM: `Invalid JAMB Registration No. supplied, please try again`,
     COURSE: `No course selected. Please select a course`,
     EMAIL: "Invalid email supplied, please try again",
     PASSWORD: `Invalid password, please supplied a minimum of ${

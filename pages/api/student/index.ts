@@ -79,7 +79,7 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   const studentData = await Student.findOne({
-    jamb,
+    jamb: jamb.toUpperCase(),
     phoneNumber,
   });
   if (!studentData) {
