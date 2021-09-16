@@ -106,8 +106,8 @@ const ExamPage = ({
   return (
     <div>
       <NextSeo title={`${examTitle} Exam`} />
-      <header className="fixed top-0 left-0 right-0 w-full p-5 h-16 bg-primary text-gray-50">
-        <div className="container flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 w-full p-5 h-24 bg-primary text-gray-50">
+        <div className="container flex justify-center items-center">
           <div>
             <Logo />
           </div>
