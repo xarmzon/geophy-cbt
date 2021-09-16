@@ -42,7 +42,9 @@ export const MESSAGES = {
   EXPIRED_EXAM: "Sorry! the date for this exam has expired.",
   CANT_START_EXAM:
     "Sorry! you can't start this exam yet. Please wait for the starting date of the exam.",
-  NEW_STUDENT_SUCCEFUL: "Test record added successfully",
+  OLD_STUDENT_SUCCEFUL: "Welcome back, Press Start to continue",
+  NEW_STUDENT_SUCCEFUL:
+    "Test record added successfully, Press Start to continue",
   CANT_RESIT: "Sorry, you can't re-sit for this course again.",
   ACCOUNT_EXIST:
     "Sorry, An account already exist with one of the details supplied",
@@ -55,6 +57,8 @@ export const MESSAGES = {
   INVALID_COURSE: "Sorry! Invalid Course ID supplied, Please try again",
   NEW_ACCOUNT_SUCCESSFUL:
     "Your Account has been created successfully. You can now login with your details.",
+  NEW_ACCOUNT_STUDENT_SUCCESSFUL:
+    "New Student Account(s) inserted successfully. ",
   LOGOUT_SUCCESSFUL: "Your account has been logged out successfully",
   QUESTION_UPDATED_SUCCESSFUL: "The Question has been updated successfully.",
   COURSE_UPDATED_SUCCESSFUL: "The Course has been updated successfully.",
@@ -67,11 +71,13 @@ export const MESSAGES = {
   LOGIN_SUC: "Account Loggedin successfully",
   LOGIN_ERR: "Sorry, Your username or password is incorrect",
   INVALID_EXAM: "Sorry, We can't find the Exam data with the supplied details",
+  NO_STUDENT: "Sorry, We can't find any Student with the details supplied",
   NO_USER: "Sorry, We can't find the User with the supplied details",
   USER_EXIST:
     "Sorry! This Username has been registered. Choose another one for your account",
   COURSE_EXIST:
     "Sorry! This course has been registered. Try again with another title",
+  STUDENT_DELETED: "The Student Data has been deleted successfully.",
   RESULT_DELETED: "The Result has been deleted successfully.",
   COURSE_DELETED: "The Course has been deleted successfully.",
   QUESTION_DELETED: "The Question has been deleted successfully.",

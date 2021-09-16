@@ -48,3 +48,14 @@ export const resultDataTableHeader: IHeader[] = [
     value: "Date Added",
   },
 ];
+export const studentDataTableHeader: IHeader[] = [
+  {
+    value: "Student",
+  },
+  {
+    value: "Phone",
+  },
+  {
+    value: "Date Added",
+  },
+];

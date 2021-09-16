@@ -1,3 +1,6 @@
+import { validFullName, validPhoneNumber } from "./../../../utils/auth";
+import { FETCH_LIMIT } from "./../../../utils/constants";
+import { getPaginatedData } from "./../course/index";
 import { MESSAGES } from "../../../utils/constants";
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectDB } from "../../../utils/database";
@@ -14,7 +17,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     switch (req.method) {
       case "POST":
-        await addStudent(req, res);
+        const { type } = req.body;
+        if (!type) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+        switch (type) {
+          case "add":
+            await addStudent(req, res);
+            break;
+          case "exam":
+            await addStudentExam(req, res);
+            break;
+          default:
+            return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+        }
         break;
       case "GET":
         await getStudents(req, res);
@@ -32,10 +46,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
+const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
   const { fullName, phoneNumber, course } = req.body;
   if (!fullName || !phoneNumber || !course)
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  const studentData = await Student.findOne({
+    fullName: formatFullName(fullName),
+    phoneNumber,
+  });
+  if (!studentData) {
+    return res.status(400).json({ msg: MESSAGES.NO_STUDENT });
+  }
 
   const courseData = await Course.findOne({ _id: course });
   if (!courseData)
@@ -50,44 +72,97 @@ const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
   if (dueDateDiff < 0)
     return res.status(400).json({ msg: MESSAGES.EXPIRED_EXAM });
 
-  const words: string[] = fullName.toLowerCase().split(" ");
-  const fullName_ = words
-    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
+  let result = await Result.findOne({
+    student: studentData._id,
+    course: courseData._id,
+  });
+  if (result && result.score > -1) {
+    return res.status(400).json({ msg: MESSAGES.CANT_RESIT });
+  } else if (result && result.score === -1) {
+    return res
+      .status(200)
+      .json({ id: result._id, msg: MESSAGES.OLD_STUDENT_SUCCEFUL });
+  } else {
+    result = await Result.create({
+      course: courseData._id,
+      student: studentData._id,
+    });
+    return res
+      .status(201)
+      .json({ id: result._id, msg: MESSAGES.NEW_STUDENT_SUCCEFUL });
+  }
+};
 
-  let studentData = await Student.findOne({ fullName: fullName_, phoneNumber });
+const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { fullName, phoneNumber } = req.body;
+  if (!fullName || !phoneNumber)
+    return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  if (!validFullName(fullName) || !validPhoneNumber(phoneNumber))
+    return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  let studentData = await Student.findOne({
+    fullName: formatFullName(fullName),
+    phoneNumber,
+  });
   if (!studentData) {
     studentData = await Student.create({
-      fullName,
+      fullName: formatFullName(fullName),
       phoneNumber,
     });
   } else {
-    const alreadyDone = await Result.findOne({
-      student: studentData._id,
-      course: courseData._id,
-      score: { $gt: -1 },
-    });
-    if (alreadyDone) return res.status(400).json({ msg: MESSAGES.CANT_RESIT });
+    return res.status(400).json({ msg: MESSAGES.ACCOUNT_EXIST });
   }
 
-  const resultData = await Result.create({
-    course: courseData._id,
-    student: studentData._id,
-  });
-
-  return res
-    .status(201)
-    .json({ id: resultData._id, msg: MESSAGES.NEW_STUDENT_SUCCEFUL });
+  return res.status(201).json({ msg: MESSAGES.NEW_ACCOUNT_STUDENT_SUCCESSFUL });
 };
 
 export const getStudents = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  try {
-    return res.status(200).json({ students: [] });
-  } catch (e) {
-    console.log(e);
-    return res.status(200).json({ students: [] });
+  let limit: number = req.query.limit
+    ? parseInt(req.query.limit as string)
+    : FETCH_LIMIT;
+  let page: number = req.query.page
+    ? parseInt(req.query.page as string) - 1
+    : 0;
+  const searchTerm: string = req.query.search
+    ? (req.query.search as string)
+    : "";
+
+  let options = {};
+  if (searchTerm) {
+    options = {
+      $or: [
+        { fullName: { $regex: searchTerm, $options: "i" } },
+        { phoneNumber: { $regex: searchTerm, $options: "i" } },
+      ],
+    };
+    page = 0;
   }
+  const pg = await getPaginatedData(page, limit, Student, options);
+
+  return res.status(200).json(pg);
+};
+
+
+const deleteStudent= async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  //console.log(id);
+  const deleted = await Student.deleteOne({ _id: id });
+  //console.log(deleted);
+  if (deleted.deletedCount && deleted.deletedCount > 0)
+    return res.status(200).json({ msg: MESSAGES.STUDENT_DELETED });
+  else return res.status(404).json({ msg: MESSAGES.NO_STUDENT });
+};
+
+export const formatFullName = (fullName: string) => {
+  const words: string[] = fullName.toLowerCase().split(" ");
+  const fullName_ = words
+    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+  return fullName_;
 };
