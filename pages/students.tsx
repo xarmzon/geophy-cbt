@@ -156,13 +156,18 @@ const Students = () => {
       case "Update":
         setSubmitText("Loading...");
         try {
-          const { data: updated } = await api.patch(ROUTES.API.STUDENT, {
+          const { data: update } = await api.patch(ROUTES.API.STUDENT, {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
             id: editID,
           });
           setFormData((prev) => ({ fullName: "", phoneNumber: "" }));
           setSubmitText((prev) => "Add Student");
+          setResMsg((prev) => ({
+            ...prev,
+            type: "success",
+            msg: update.msg,
+          }));
         } catch (e) {
           setSubmitText((prev) => "Update");
           setResMsg((prev) => ({
