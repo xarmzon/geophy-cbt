@@ -14,7 +14,7 @@ import { IRegRes } from "../components/dashboard/AuthForm";
 import { studentDataTableHeader } from "../data/headers";
 import dateformat from "dateformat";
 import Link from "next/link";
-
+import Papa from "papaparse";
 interface IFormData {
   fullName: string;
   phoneNumber: string;
@@ -51,7 +51,7 @@ const Students = () => {
     `${ROUTES.API.STUDENT}?search=${searchVal}&page=${page}`
   );
 
-  //if (studentsData) console.log(studentsData);
+  if (studentsData) console.log(studentsData);
   const [editID, setEditID] = useState<string>("");
 
   const resetMessage = () => {
@@ -78,15 +78,59 @@ const Students = () => {
   };
   const handleDelete = async (id: string) => {
     resetMessage();
-    console.log(id);
+    if (confirm("Are you sure?")) {
+      try {
+        setLoading((prev) => true);
+        const { data } = await api.delete(`${ROUTES.API.STUDENT}/${id}`);
+        setMessage((prev) => ({ msg: data.msg, type: "success" }));
+      } catch (error) {
+        setMessage((prev) => ({ msg: errorMessage(error), type: "error" }));
+      } finally {
+        setLoading((prev) => false);
+      }
+    }
   };
   const handlePagination = (page: number) => {
     resetMessage();
     setPage((prev) => page);
   };
 
-  const handleExcelUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+  const handleStudentsUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading((prev) => true);
+    Papa.parse(e.target.files[0], {
+      header: true,
+      error: function (err) {
+        setMessage((prev) => ({
+          msg: "Error occurred while uploading the data",
+          type: "error",
+        }));
+        setLoading((prev) => false);
+      },
+      complete: async function (results) {
+        try {
+          const { data: upload } = await api.post(ROUTES.API.STUDENT, {
+            students: results.data,
+            type: "upload",
+          });
+          setResMsg((prev) => ({
+            ...prev,
+            type: "success",
+            msg: upload.msg,
+          }));
+          //console.log(uploadMsg);
+        } catch (e) {
+          setResMsg((prev) => ({
+            ...prev,
+            type: "error",
+            msg: errorMessage(e),
+          }));
+        } finally {
+          setLoading((prev) => false);
+        }
+      },
+    });
     //setSubmitText(prev=>"Upload Student")
   };
 
@@ -207,7 +251,7 @@ const Students = () => {
               </div>
             )}
             <form className="space-y-7" onSubmit={handleSubmit}>
-              <Input
+              {/* <Input
                 error={formDataError.fullName}
                 type="text"
                 placeholder="Enter the student Full Name"
@@ -236,33 +280,35 @@ const Students = () => {
                   handleFormChange(e.target.value, e.target.name)
                 }
                 required
-              />
-              <Input name="submit" type="submit" value={submitText} isBtn />
-              <div className="flex justify-center">
+              /> */}
+              {/* <Input name="submit" type="submit" value={submitText} isBtn /> */}
+              <div className="p-5 flex justify-center">
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleExcelUpload(e)
+                    handleStudentsUpload(e)
                   }
                   ref={fileRef}
                   className="hidden"
                   type="file"
-                  accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  accept=".csv"
                   name="upload_file"
                 />
                 <p
                   onClick={() => {
+                    setResMsg((prev) => ({ msg: "", type: "info" }));
                     const fBtn = fileRef?.current;
-                    fBtn?.click();
+                    if (!loading) fBtn?.click();
                   }}
-                  className="-mt-5 text-primary text-center cursor-pointer underline"
+                  className="-mt-5 border-1 border-primary border-dotted p-5 text-primary text-center cursor-pointer"
                 >
-                  Upload Excel File
+                  {loading ? "Loading..." : "Upload Students"}
                 </p>
               </div>
             </form>
           </section>
           <section className="bg-white mt-3 p-3 shadow-lg w-full md:w-[70%]">
             <DataTable
+              showEdit={false}
               header={studentDataTableHeader}
               loading={
                 !studentsDataError && !studentsData

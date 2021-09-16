@@ -20,6 +20,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const { type } = req.body;
         if (!type) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
         switch (type) {
+          case "upload":
+            await uploadStudents(req, res);
+            break;
           case "add":
             await addStudent(req, res);
             break;
@@ -46,6 +49,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(e);
     res.status(500).json({ msg: MESSAGES.UNKNOWN_ERROR });
   }
+};
+
+const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { students } = req.body;
+  if (!students) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  //console.log(students[0]);
+  const studentsToInsert = students.map((d) => {
+    return {
+      email: d["Username"],
+      fullName: d["Surname"] + " " + d["First name"] + " " + d["Other names"],
+      jamb: d["JAMB Registration Number"],
+      faculty: d["Faculty"],
+      department: d["Department"],
+      courseSelections: d["Course Selections"],
+      phoneNumber: d["Phone Number"],
+    };
+  });
+
+  await Student.insertMany(studentsToInsert);
+
+  return res.status(201).json({ msg: MESSAGES.NEW_ACCOUNT_STUDENT_SUCCESSFUL });
 };
 
 const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {

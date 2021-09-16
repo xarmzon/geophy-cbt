@@ -3,6 +3,11 @@ import { Schema, models, model } from "mongoose";
 export interface IStudent {
   fullName: string;
   phoneNumber: string;
+  email: string;
+  jamb: string;
+  faculty: string;
+  department: string;
+  courseSelections: string;
 }
 const StudentSchema = new Schema<IStudent>(
   {
@@ -11,6 +16,26 @@ const StudentSchema = new Schema<IStudent>(
       required: true,
     },
     phoneNumber: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    jamb: {
+      type: String,
+      required: true,
+    },
+    faculty: {
+      type: String,
+      required: true,
+    },
+    department: {
+      type: String,
+      required: true,
+    },
+    courseSelections: {
       type: String,
       required: true,
     },
