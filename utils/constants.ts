@@ -77,6 +77,7 @@ export const MESSAGES = {
     "Sorry! This Username has been registered. Choose another one for your account",
   COURSE_EXIST:
     "Sorry! This course has been registered. Try again with another title",
+  STUDENT_UPDATED: "The Student Data has been updated successfully.",
   STUDENT_DELETED: "The Student Data has been deleted successfully.",
   RESULT_DELETED: "The Result has been deleted successfully.",
   COURSE_DELETED: "The Course has been deleted successfully.",

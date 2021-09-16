@@ -34,8 +34,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await getStudents(req, res);
         break;
       case "PATCH":
+        await updateStudent(req, res);
         break;
       case "DELETE":
+        await deleteStudent(req, res);
         break;
       default:
         return;
@@ -146,8 +148,7 @@ export const getStudents = async (
   return res.status(200).json(pg);
 };
 
-
-const deleteStudent= async (req: NextApiRequest, res: NextApiResponse) => {
+const deleteStudent = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.query;
   if (!id) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
@@ -157,6 +158,24 @@ const deleteStudent= async (req: NextApiRequest, res: NextApiResponse) => {
   if (deleted.deletedCount && deleted.deletedCount > 0)
     return res.status(200).json({ msg: MESSAGES.STUDENT_DELETED });
   else return res.status(404).json({ msg: MESSAGES.NO_STUDENT });
+};
+
+const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { fullName, phoneNumber, id } = req.body;
+  if (!fullName || !phoneNumber)
+    return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  if (!validFullName(fullName) || !validPhoneNumber(phoneNumber))
+    return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  const studentData = await Student.findById(id);
+  if (!studentData) return res.status(400).json({ msg: MESSAGES.NO_STUDENT });
+
+  studentData.fullName = formatFullName(fullName);
+  studentData.phoneNumber = phoneNumber;
+
+  await studentData.save();
+  return res.status(200).json({ msg: MESSAGES.STUDENT_UPDATED });
 };
 
 export const formatFullName = (fullName: string) => {

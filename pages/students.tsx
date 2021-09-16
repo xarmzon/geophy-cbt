@@ -65,12 +65,15 @@ const Students = () => {
   };
   const handleEdit = (id: string) => {
     resetMessage();
-    const data = studentsData?.results?.filter((v)=>v._id === id)[0]
+    const data = studentsData?.results?.filter((v) => v._id === id)[0];
     //console.log(data)
-    if(data){
-      setEditID(prev=>data._id)
-      setFormData(prev=>({fullName:data.fullName, phoneNumber: data.phoneNumber}))
-      setSubmitText(prev=>"Update")
+    if (data) {
+      setEditID((prev) => data._id);
+      setFormData((prev) => ({
+        fullName: data.fullName,
+        phoneNumber: data.phoneNumber,
+      }));
+      setSubmitText((prev) => "Update");
     }
   };
   const handleDelete = async (id: string) => {
@@ -125,6 +128,7 @@ const Students = () => {
             type: "success",
             msg: data.msg,
           }));
+          mutate(`${ROUTES.API.STUDENT}?search=${searchVal}&page=${0}`);
         } catch (e) {
           setResMsg((prev) => ({
             ...prev,
@@ -146,10 +150,38 @@ const Students = () => {
         break;
 
       case "Upload Student":
+        mutate(`${ROUTES.API.STUDENT}?search=${searchVal}&page=${0}`);
         break;
 
       case "Update":
-        setSubmitText(prev=>"Add Student")
+        setSubmitText("Loading...");
+        try {
+          const { data: updated } = await api.patch(ROUTES.API.STUDENT, {
+            fullName: formData.fullName,
+            phoneNumber: formData.phoneNumber,
+            id: editID,
+          });
+          setFormData((prev) => ({ fullName: "", phoneNumber: "" }));
+          setSubmitText((prev) => "Add Student");
+        } catch (e) {
+          setSubmitText((prev) => "Update");
+          setResMsg((prev) => ({
+            ...prev,
+            type: "error",
+            msg: errorMessage(e),
+          }));
+          const componentErr = componentsErrors(e);
+          if (componentErr.length > 0) {
+            componentErr.map((err) =>
+              setFormDataError((prev) => ({
+                ...prev,
+                [err.type]: err.msg,
+              }))
+            );
+          }
+        } finally {
+          mutate(`${ROUTES.API.STUDENT}?search=${searchVal}&page=${page}`);
+        }
         break;
       default:
         return;
