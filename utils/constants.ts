@@ -115,4 +115,4 @@ export const MESSAGES = {
   },
 };
 
-export const DESCRIPTIONS: string = `BEST Tutorial Plug on Mathematics, Physics, Chemistry, and Statistics Courses? Created To Tutor, Mentor, Guide, and Lead Students to Obtaining the Best Grades In Their Subjects/Courses. Unilorin, Kwara State, Nigeria`;
+export const DESCRIPTIONS: string = `Muslim Students Society of Nigeria, Unilorin Branch Mock Examination Portal`;

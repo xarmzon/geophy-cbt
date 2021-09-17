@@ -109,7 +109,7 @@ const ExamPage = ({
       <header className="fixed top-0 left-0 right-0 w-full p-5 h-24 bg-primary text-gray-50">
         <div className="container flex justify-center items-center">
           <div>
-            <Logo />
+            <Logo size="large" />
           </div>
         </div>
       </header>
@@ -156,7 +156,7 @@ const ExamPage = ({
                 </p> */}
                 <div className="w-full flex flex-col justify-center items-center p-2">
                   <ExamTimer
-                    user={{id:student.id, course:course.id}}
+                    user={{ id: student.id, course: course.id }}
                     stopTime={stopTime}
                     expiryTime={course.timeAllowed}
                     onExpired={submitAnswer}
