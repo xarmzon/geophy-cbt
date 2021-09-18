@@ -167,7 +167,7 @@ const Dashboard = () => {
                                   : (d.score / d.course.questionNum) * 100 <
                                       70 &&
                                     (d.score / d.course.questionNum) * 100 >= 60
-                                  ? "text-primary"
+                                  ? "text-secondary"
                                   : (d.score / d.course.questionNum) * 100 <
                                       60 &&
                                     (d.score / d.course.questionNum) * 100 >= 50

@@ -286,7 +286,7 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
   const pipelines = [
     {
       $match: {
-        $or: [{ jamb: reg }, { email: reg }],
+        $or: [{ jamb: reg.toUpperCase() }, { email: reg.toLowerCase() }],
       },
     },
     {
