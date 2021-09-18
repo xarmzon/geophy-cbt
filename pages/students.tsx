@@ -22,7 +22,7 @@ interface IFormData {
   faculty: string;
   email: string;
   jamb: string;
-  courseSelections: string[];
+  courseSelections: string;
 }
 interface IEditData extends IFormData {}
 const Students = () => {
@@ -39,7 +39,7 @@ const Students = () => {
     department: "",
     email: "",
     faculty: "",
-    courseSelections: [],
+    courseSelections: "",
   });
   const [formData, setFormData] = useState<IFormData>({
     fullName: "",
@@ -48,7 +48,7 @@ const Students = () => {
     department: "",
     email: "",
     faculty: "",
-    courseSelections: [],
+    courseSelections: "",
   });
   const [resMsg, setResMsg] = useState<IRegRes>({
     type: "error",
@@ -197,7 +197,7 @@ const Students = () => {
       faculty: "",
       department: "",
       jamb: "",
-      courseSelections: [],
+      courseSelections: "",
     }));
     switch (submitText) {
       case "Add Student":
@@ -217,8 +217,22 @@ const Students = () => {
           const { data } = await api.post(ROUTES.API.STUDENT, {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
+            email: formData.email,
+            faculty: formData.faculty,
+            department: formData.department,
+            jamb: formData.jamb,
+            courseSelections: formData.courseSelections,
             type: "add",
           });
+          setFormData((prev) => ({
+            fullName: "",
+            phoneNumber: "",
+            email: "",
+            faculty: "",
+            department: "",
+            jamb: "",
+            courseSelections: "",
+          }));
           setResMsg((prev) => ({
             ...prev,
             type: "success",
@@ -255,6 +269,11 @@ const Students = () => {
           const { data: update } = await api.patch(ROUTES.API.STUDENT, {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
+            email: formData.email,
+            faculty: formData.faculty,
+            department: formData.department,
+            jamb: formData.jamb,
+            courseSelections: formData.courseSelections,
             id: editID,
           });
           setFormData((prev) => ({
@@ -264,7 +283,7 @@ const Students = () => {
             faculty: "",
             department: "",
             jamb: "",
-            courseSelections: [],
+            courseSelections: "",
           }));
           setSubmitText((prev) => "Add Student");
           setResMsg((prev) => ({
@@ -384,7 +403,7 @@ const Students = () => {
               />
               <Input
                 error={formDataError.faculty}
-                type="tel"
+                type="text"
                 placeholder="Student Faculty"
                 showLabel
                 labelValue="Faculty"
@@ -395,14 +414,20 @@ const Students = () => {
                 }
                 required
               />
-              <div>
-              
-                <input
-                  type="checkbox"
-                  value={`value2`}
-                  name="courseSelections"
-                />
-              </div>
+              <Input
+                error={formDataError.courseSelections}
+                type="text"
+                placeholder="Enter the course separated by ;"
+                showLabel
+                labelValue="Course Selections"
+                name="courseSelections"
+                value={formData.courseSelections}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange(e.target.value, e.target.name)
+                }
+                required
+              />
+
               <Input name="submit" type="submit" value={submitText} isBtn />
               <div className="p-5 flex flex-col justify-center">
                 <input
@@ -436,7 +461,6 @@ const Students = () => {
           </section>
           <section className="bg-white mt-3 p-3 shadow-lg w-full md:w-[70%]">
             <DataTable
-              showEdit={false}
               header={studentDataTableHeader}
               loading={
                 !studentsDataError && !studentsData

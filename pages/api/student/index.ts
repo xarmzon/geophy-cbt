@@ -149,8 +149,24 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { fullName, phoneNumber } = req.body;
-  if (!fullName || !phoneNumber)
+  const {
+    fullName,
+    phoneNumber,
+    email,
+    faculty,
+    department,
+    jamb,
+    courseSelections,
+  } = req.body;
+  if (
+    !fullName ||
+    !phoneNumber ||
+    !email ||
+    !faculty ||
+    !department ||
+    !jamb ||
+    !courseSelections
+  )
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   if (!validFullName(fullName) || !validPhoneNumber(phoneNumber))
@@ -164,6 +180,14 @@ const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
     studentData = await Student.create({
       fullName: formatFullName(fullName),
       phoneNumber,
+      email,
+      faculty: toTitleCase(faculty),
+      department: toTitleCase(department),
+      jamb: jamb.toUpperCase(),
+      courseSelections: courseSelections
+        .split(";")
+        .map((d, i) => d.toUpperCase())
+        .join(";"),
     });
   } else {
     return res.status(400).json({ msg: MESSAGES.ACCOUNT_EXIST });
@@ -223,8 +247,26 @@ const deleteStudents = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { fullName, phoneNumber, id } = req.body;
-  if (!fullName || !phoneNumber)
+  const {
+    fullName,
+    phoneNumber,
+    id,
+    email,
+    faculty,
+    department,
+    jamb,
+    courseSelections,
+  } = req.body;
+  if (
+    !fullName ||
+    !phoneNumber ||
+    !email ||
+    !faculty ||
+    !department ||
+    !jamb ||
+    !courseSelections ||
+    !id
+  )
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   if (!validFullName(fullName) || !validPhoneNumber(phoneNumber))
@@ -235,6 +277,11 @@ const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
 
   studentData.fullName = formatFullName(fullName);
   studentData.phoneNumber = phoneNumber;
+  studentData.jamb = jamb;
+  studentData.email = email;
+  studentData.faculty = faculty;
+  studentData.department = department;
+  studentData.courseSelections = courseSelections;
 
   await studentData.save();
   return res.status(200).json({ msg: MESSAGES.STUDENT_UPDATED });
