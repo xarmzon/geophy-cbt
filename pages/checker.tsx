@@ -5,12 +5,15 @@ import Footer from "../components/general/Footer";
 import Logo from "../components/general/Logo";
 import { IRegRes } from "../components/dashboard/AuthForm";
 import Alert from "../components/general/Alert";
+import api from "../utils/fetcher";
+import { ROUTES } from "../utils/constants";
+import { errorMessage } from "../utils/errorHandler";
 
 interface IData {
   value: string;
   error: string;
 }
-const sText = "Check My Results";
+const sText = "Submit";
 const ResultChecker = () => {
   const msgRef = useRef<HTMLDivElement | undefined>();
 
@@ -31,14 +34,29 @@ const ResultChecker = () => {
     if (jambOrEmail.error.length > 0)
       setJambOrEmail((prev) => ({ ...prev, error: "" }));
   };
+  const restResMsg = () => {
+    if (resMsg.msg.length > 0) setResMsg((prev) => ({ msg: "", type: "info" }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     resetFormError();
+    restResMsg();
     handleResMsg();
     switch (submitText) {
       case sText:
-        console.log(jambOrEmail);
+        try {
+          setSubmitText("Loading...");
+          const { data } = await api.post(ROUTES.API.RESULT, {
+            reg: jambOrEmail.value,
+          });
+          console.log(data);
+          //setResMsg((prev) => ({ msg: data.msg, type: "success" }));
+        } catch (e) {
+          setResMsg((prev) => ({ msg: errorMessage(e), type: "error" }));
+        } finally {
+          setSubmitText(sText);
+        }
         break;
       default:
         return;

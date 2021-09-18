@@ -81,7 +81,10 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
       faculty: toTitleCase(d["Faculty"].trim()),
       department: toTitleCase(d["Department"].trim()),
       courseSelections: d["Course Selections"],
-      phoneNumber: d["Phone Number"],
+      phoneNumber:
+        d["Phone Number"].length < 11
+          ? "0" + d["Phone Number"]
+          : d["Phone Number"],
     };
   });
 
@@ -110,7 +113,7 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
   const isStudentCourse = studentData.courseSelections
     .split(";")
     .map((d, i) => d.split(" ").join("").toLowerCase())
-    .includes(courseData.title.toLowerCase());
+    .includes(courseData.title.split(" ").join("").toLowerCase());
 
   if (!isStudentCourse)
     return res.status(400).json({ msg: MESSAGES.CANT_REGISTER_EXAM });

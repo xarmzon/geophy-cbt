@@ -42,6 +42,7 @@ const ExamPage = ({
       JSON.parse(examData).student || {
         fullName: "",
         phoneNumber: "",
+        department: "",
         id: "",
       }
   );
@@ -135,6 +136,12 @@ const ExamPage = ({
                     Full Name:{" "}
                   </span>
                   {student.fullName}
+                </p>
+                <p>
+                  <span className="font-bold text-primary inline-block pr-3">
+                    Department:{" "}
+                  </span>
+                  {student.department}
                 </p>
                 <p>
                   <span className="font-bold text-primary inline-block pr-3">
@@ -331,6 +338,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             fullName: student.fullName,
             phoneNumber: student.phoneNumber,
             id: student._id,
+            department: student.department,
           };
           examData.course = {
             id: exam.course._id,

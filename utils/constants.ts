@@ -72,6 +72,7 @@ export const MESSAGES = {
   LOGIN_SUC: "Account Loggedin successfully",
   LOGIN_ERR: "Sorry, Your username or password is incorrect",
   INVALID_EXAM: "Sorry, We can't find the Exam data with the supplied details",
+  NO_RESULT: "Sorry, We can't find any Result with the details supplied",
   NO_STUDENT: "Sorry, We can't find any Student with the details supplied",
   NO_USER: "Sorry, We can't find the User with the supplied details",
   USER_EXIST:

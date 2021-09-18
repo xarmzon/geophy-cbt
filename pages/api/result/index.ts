@@ -20,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     switch (req.method) {
       case "POST":
+        await resultChecker(req, res);
         break;
       case "GET":
         await getResults(req, res);
@@ -275,4 +276,65 @@ const deleteResult = async (req: NextApiRequest, res: NextApiResponse) => {
   if (deleted.deletedCount && deleted.deletedCount > 0)
     return res.status(200).json({ msg: MESSAGES.RESULT_DELETED });
   else return res.status(404).json({ msg: MESSAGES.RESULT_NOT_FOUND });
+};
+
+const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { reg } = req.body;
+  if (!reg) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+
+  //console.log(reg);
+  const pipelines = [
+    {
+      $match: {
+        $or: [{ jamb: { $regex: reg, $options: "i" } }, { email: reg }],
+      },
+    },
+    {
+      $lookup: {
+        from: "results",
+        let: { id: "$_id" },
+        as: "results",
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$student", "$$id"] }, { $gt: ["$score", -1] }],
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "courses",
+              localField: "course",
+              foreignField: "_id",
+              as: "course",
+            },
+          },
+          {
+            $unwind: "$course",
+          },
+          {
+            $project: {
+              score: 1,
+              course: "$course.title",
+            },
+          },
+        ],
+      },
+    },
+    {
+      $project:{
+        fullName:1,
+        jamb:1,
+        department:1,
+        results:1
+      }
+    }
+  ];
+
+  const studentResults = await Student.aggregate(pipelines);
+  if (studentResults && studentResults[0]?.results.length > 0)
+    return res.status(200).json({ result: studentResults[0] });
+
+  return res.status(404).json({ msg: MESSAGES.NO_RESULT });
 };
