@@ -13,11 +13,23 @@ interface IData {
   value: string;
   error: string;
 }
+
+interface R {
+  _id: string;
+  score: number;
+  course: string;
+}
+interface RData {
+  fullName: string;
+  jamb: string;
+  department: string;
+  results: Array<R>;
+}
 const sText = "Submit";
 const ResultChecker = () => {
   const msgRef = useRef<HTMLDivElement | undefined>();
 
-  const [resultsData, setResultsData] = useState("");
+  const [resultsData, setResultsData] = useState<RData | null>(null);
   const [jambOrEmail, setJambOrEmail] = useState<IData>({
     value: "",
     error: "",
@@ -46,11 +58,13 @@ const ResultChecker = () => {
     switch (submitText) {
       case sText:
         try {
+          setResultsData(null);
           setSubmitText("Loading...");
           const { data } = await api.post(ROUTES.API.RESULT, {
             reg: jambOrEmail.value,
           });
-          console.log(data);
+          console.log(data.result);
+          setResultsData(data.result);
           //setResMsg((prev) => ({ msg: data.msg, type: "success" }));
         } catch (e) {
           setResMsg((prev) => ({ msg: errorMessage(e), type: "error" }));
@@ -97,42 +111,46 @@ const ResultChecker = () => {
               <Input type="submit" name="submit" value={submitText} isBtn />
             </form>
           </div>
-          <div className="overflow-x-auto mt-10">
-            <h1 className="text-lg px-3 font-bold text-center mb-4">
-              MSSN Mock Exam Results Notification
-            </h1>
-            <div className="px-3">
-              <div className="text-secondary space-y-2 mb-5">
-                <p className="flex">
-                  <span className="w-2/5 flex-shrink-0"> Name: </span>
-                  <span className="3/5 flex-shrink-0 font-bold px-3 flex-wrap">
-                    Adelola Kayode Samson
-                  </span>
-                </p>
-                <p className="flex">
-                  <span className="w-2/5 flex-shrink-0">JAMB Reg.:</span>
-                  <span className="3/5 flex-shrink-0 font-bold px-3">
-                    23568745AD
-                  </span>
-                </p>
-                <p className="flex">
-                  <span className="w-2/5 flex-shrink-0"> Department: </span>
-                  <span className="3/5 flex-shrink-0 font-bold px-3">
-                    Mathematics
-                  </span>
-                </p>
-              </div>
-              <div>
-                <h4 className="font-bold text-lg text-secondary">Results</h4>
-                <ul className="my-4">
-                  <li className="space-x-4">
-                    <span className="">MAT411</span>
-                    <span className="font-bold ">45%</span>
-                  </li>
-                </ul>
+          {resultsData && submitText !== "Loading..." && (
+            <div className="overflow-x-auto mt-10">
+              <h1 className="text-lg px-3 font-bold text-center mb-4">
+                MSSN Mock Exam Results Notification
+              </h1>
+              <div className="px-3">
+                <div className="text-secondary space-y-2 mb-5">
+                  <p className="flex">
+                    <span className="w-2/5 flex-shrink-0"> Name: </span>
+                    <span className="3/5 flex-shrink-0 font-bold px-3 flex-wrap">
+                      {resultsData.fullName}
+                    </span>
+                  </p>
+                  <p className="flex">
+                    <span className="w-2/5 flex-shrink-0">JAMB Reg.:</span>
+                    <span className="3/5 flex-shrink-0 font-bold px-3">
+                      {resultsData.jamb}
+                    </span>
+                  </p>
+                  <p className="flex">
+                    <span className="w-2/5 flex-shrink-0"> Department: </span>
+                    <span className="3/5 flex-shrink-0 font-bold px-3">
+                      {resultsData.department}
+                    </span>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg text-secondary">Results</h4>
+                  <ul className="mb-5">
+                    {resultsData.results.map((d, i) => (
+                      <li key={i} className="mb-2 space-x-4">
+                        <span className="">{d.course}</span>
+                        <span className="font-bold ">{d.score}%</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="text-gray-200 mt-9 max-w-md mx-auto text-center">
           <Footer />

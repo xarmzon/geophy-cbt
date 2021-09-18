@@ -48,7 +48,8 @@ export const validJAMB = (jambN: string): boolean => {
 };
 
 export const validPhoneNumber = (phone: string): boolean => {
-  return /^(080|070|081|031|090)\d{8}$/.test(phone);
+  return /^\d{11}$/.test(phone);
+  //return /^(080|070|081|031|090|091|)\d{8}$/.test(phone);
 };
 export const validFullName = (fullname: string): boolean => {
   return /^[a-zA-Z][a-zA-Z\s]{6,50}$/.test(fullname);

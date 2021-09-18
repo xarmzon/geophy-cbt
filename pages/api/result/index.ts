@@ -171,7 +171,7 @@ export const getResultsData = async (
                           100,
                         ],
                       },
-                      2,
+                      1,
                     ],
                   },
                   "---",
@@ -286,7 +286,7 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
   const pipelines = [
     {
       $match: {
-        $or: [{ jamb: { $regex: reg, $options: "i" } }, { email: reg }],
+        $or: [{ jamb: reg }, { email: reg }],
       },
     },
     {
@@ -315,7 +315,23 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           {
             $project: {
-              score: 1,
+              score: {
+                $cond: [
+                  { $gt: ["$score", 0] },
+                  {
+                    $round: [
+                      {
+                        $multiply: [
+                          { $divide: ["$score", "$course.questionNum"] },
+                          100,
+                        ],
+                      },
+                      1,
+                    ],
+                  },
+                  "0",
+                ],
+              },
               course: "$course.title",
             },
           },
@@ -323,13 +339,13 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     },
     {
-      $project:{
-        fullName:1,
-        jamb:1,
-        department:1,
-        results:1
-      }
-    }
+      $project: {
+        fullName: 1,
+        jamb: 1,
+        department: 1,
+        results: 1,
+      },
+    },
   ];
 
   const studentResults = await Student.aggregate(pipelines);

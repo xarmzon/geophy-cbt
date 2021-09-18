@@ -18,6 +18,11 @@ import Papa from "papaparse";
 interface IFormData {
   fullName: string;
   phoneNumber: string;
+  department: string;
+  faculty: string;
+  email: string;
+  jamb: string;
+  courseSelections: string[];
 }
 interface IEditData extends IFormData {}
 const Students = () => {
@@ -30,10 +35,20 @@ const Students = () => {
   const [formDataError, setFormDataError] = useState<IFormData>({
     fullName: "",
     phoneNumber: "",
+    jamb: "",
+    department: "",
+    email: "",
+    faculty: "",
+    courseSelections: [],
   });
   const [formData, setFormData] = useState<IFormData>({
     fullName: "",
     phoneNumber: "",
+    jamb: "",
+    department: "",
+    email: "",
+    faculty: "",
+    courseSelections: [],
   });
   const [resMsg, setResMsg] = useState<IRegRes>({
     type: "error",
@@ -73,6 +88,11 @@ const Students = () => {
       setFormData((prev) => ({
         fullName: data.fullName,
         phoneNumber: data.phoneNumber,
+        email: data.email,
+        faculty: data.faculty,
+        department: data.department,
+        jamb: data.jamb,
+        courseSelections: data.courseSelections,
       }));
       setSubmitText((prev) => "Update");
     }
@@ -170,7 +190,15 @@ const Students = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     handleResMsg();
-    setFormDataError((prev) => ({ fullName: "", phoneNumber: "" }));
+    setFormDataError((prev) => ({
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      faculty: "",
+      department: "",
+      jamb: "",
+      courseSelections: [],
+    }));
     switch (submitText) {
       case "Add Student":
         if (!validFullName(formData.fullName))
@@ -229,7 +257,15 @@ const Students = () => {
             phoneNumber: formData.phoneNumber,
             id: editID,
           });
-          setFormData((prev) => ({ fullName: "", phoneNumber: "" }));
+          setFormData((prev) => ({
+            fullName: "",
+            phoneNumber: "",
+            email: "",
+            faculty: "",
+            department: "",
+            jamb: "",
+            courseSelections: [],
+          }));
           setSubmitText((prev) => "Add Student");
           setResMsg((prev) => ({
             ...prev,
@@ -275,10 +311,10 @@ const Students = () => {
               </div>
             )}
             <form className="space-y-7" onSubmit={handleSubmit}>
-              {/* <Input
+              <Input
                 error={formDataError.fullName}
                 type="text"
-                placeholder="Enter the student Full Name"
+                placeholder="Student Full Name"
                 showLabel
                 labelValue="Full Name"
                 name="fullName"
@@ -291,9 +327,37 @@ const Students = () => {
                 required
               />
               <Input
+                error={formDataError.jamb}
+                type="text"
+                placeholder="Student JAMB No."
+                showLabel
+                labelValue="JAMB Reg."
+                name="jamb"
+                minLength={7}
+                maxLength={50}
+                value={formData.jamb}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange(e.target.value, e.target.name)
+                }
+                required
+              />
+              <Input
+                error={formDataError.email}
+                type="email"
+                placeholder="Student Email"
+                showLabel
+                labelValue="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange(e.target.value, e.target.name)
+                }
+                required
+              />
+              <Input
                 error={formDataError.phoneNumber}
                 type="tel"
-                placeholder="Enter the student Phone Number"
+                placeholder="Student Phone Number"
                 showLabel
                 labelValue="Phone Number"
                 name="phoneNumber"
@@ -304,8 +368,42 @@ const Students = () => {
                   handleFormChange(e.target.value, e.target.name)
                 }
                 required
-              /> */}
-              {/* <Input name="submit" type="submit" value={submitText} isBtn /> */}
+              />
+              <Input
+                error={formDataError.department}
+                type="text"
+                placeholder="Student Department"
+                showLabel
+                labelValue="Department"
+                name="department"
+                value={formData.department}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange(e.target.value, e.target.name)
+                }
+                required
+              />
+              <Input
+                error={formDataError.faculty}
+                type="tel"
+                placeholder="Student Faculty"
+                showLabel
+                labelValue="Faculty"
+                name="faculty"
+                value={formData.faculty}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFormChange(e.target.value, e.target.name)
+                }
+                required
+              />
+              <div>
+              
+                <input
+                  type="checkbox"
+                  value={`value2`}
+                  name="courseSelections"
+                />
+              </div>
+              <Input name="submit" type="submit" value={submitText} isBtn />
               <div className="p-5 flex flex-col justify-center">
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -323,13 +421,13 @@ const Students = () => {
                     const fBtn = fileRef?.current;
                     if (!loading) fBtn?.click();
                   }}
-                  className="-mt-5 border-1 border-primary border-dotted p-5 text-primary text-center cursor-pointer"
+                  className="mb-2 text-primary text-center cursor-pointer"
                 >
                   {loading ? "Loading..." : "Upload Students"}
                 </p>
                 <p
                   onClick={handleDeleteAll}
-                  className="mt-3 border-1 border-primary border-dotted p-5 text-primary text-center cursor-pointer"
+                  className="text-primary text-center cursor-pointer"
                 >
                   {loading ? "Loading..." : "Delete All Students"}
                 </p>
