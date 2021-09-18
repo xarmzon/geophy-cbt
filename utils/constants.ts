@@ -42,6 +42,7 @@ export const MESSAGES = {
   EXPIRED_EXAM: "Sorry! the date for this exam has expired.",
   CANT_START_EXAM:
     "Sorry! you can't start this exam yet. Please wait for the starting date of the exam.",
+  CANT_REGISTER_EXAM: "Sorry! you can't register for this exam.",
   OLD_STUDENT_SUCCEFUL: "Welcome back, Press Start to continue",
   NEW_STUDENT_SUCCEFUL:
     "Test record added successfully, Press Start to continue",

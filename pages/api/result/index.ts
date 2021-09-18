@@ -61,7 +61,7 @@ const getResults = async (req: NextApiRequest, res: NextApiResponse) => {
         { phoneNumber: { $regex: searchTerm } },
       ],
     };
-    page = 0;
+    //page = 0;
   }
   const pg = await getResultsData(page, limit, filter);
 

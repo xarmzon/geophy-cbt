@@ -40,10 +40,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await updateStudent(req, res);
         break;
       case "DELETE":
-        await deleteStudent(req, res);
+        const { delete_ } = req.query;
+        if (!delete_)
+          return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+        switch (delete_) {
+          case "many":
+            await deleteStudents(req, res);
+            break;
+          case "one":
+            await deleteStudent(req, res);
+            break;
+          default:
+            return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
+        }
         break;
       default:
-        return;
+        return res.status(400).json({ msg: MESSAGES.METHOD_NOT_ALLOWED });
     }
   } catch (e) {
     console.log(e);
@@ -58,11 +70,16 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
   //console.log(students[0]);
   const studentsToInsert = students.map((d) => {
     return {
-      email: d["Username"],
-      fullName: d["Surname"] + " " + d["First name"] + " " + d["Other names"],
-      jamb: d["JAMB Registration Number"],
-      faculty: d["Faculty"],
-      department: d["Department"],
+      email: d["Username"].toLowerCase(),
+      fullName:
+        toTitleCase(d["Surname"].trim()) +
+        " " +
+        toTitleCase(d["First name"].trim()) +
+        " " +
+        toTitleCase(d["Other names"].trim()),
+      jamb: d["JAMB Registration Number"].toUpperCase(),
+      faculty: toTitleCase(d["Faculty"].trim()),
+      department: toTitleCase(d["Department"].trim()),
       courseSelections: d["Course Selections"],
       phoneNumber: d["Phone Number"],
     };
@@ -89,6 +106,14 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
   const courseData = await Course.findOne({ _id: course });
   if (!courseData)
     return res.status(404).json({ msg: MESSAGES.NO_COURSE_DATA });
+
+  const isStudentCourse = studentData.courseSelections
+    .split(";")
+    .map((d, i) => d.split(" ").join("").toLowerCase())
+    .includes(courseData.title.toLowerCase());
+
+  if (!isStudentCourse)
+    return res.status(400).json({ msg: MESSAGES.CANT_REGISTER_EXAM });
 
   const startDiff: number = +new Date(courseData.startDate) - +new Date();
 
@@ -166,7 +191,7 @@ export const getStudents = async (
         { phoneNumber: { $regex: searchTerm, $options: "i" } },
       ],
     };
-    page = 0;
+    //page = 0;
   }
   const pg = await getPaginatedData(page, limit, Student, options);
 
@@ -183,6 +208,15 @@ const deleteStudent = async (req: NextApiRequest, res: NextApiResponse) => {
   if (deleted.deletedCount && deleted.deletedCount > 0)
     return res.status(200).json({ msg: MESSAGES.STUDENT_DELETED });
   else return res.status(404).json({ msg: MESSAGES.NO_STUDENT });
+};
+
+const deleteStudents = async (req: NextApiRequest, res: NextApiResponse) => {
+  const deleted = await Student.deleteMany({});
+  //console.log(deleted);
+  if (deleted.deletedCount && deleted.deletedCount > 0) {
+    const deletedR = await Result.deleteMany({});
+    return res.status(200).json({ msg: MESSAGES.STUDENT_DELETED });
+  } else return res.status(404).json({ msg: MESSAGES.NO_STUDENT });
 };
 
 const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -205,6 +239,13 @@ const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
 
 export const formatFullName = (fullName: string) => {
   const words: string[] = fullName.toLowerCase().split(" ");
+  const fullName_ = words
+    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+  return fullName_;
+};
+export const toTitleCase = (text: string) => {
+  const words: string[] = text.toLowerCase().split(" ");
   const fullName_ = words
     .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");

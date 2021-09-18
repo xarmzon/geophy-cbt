@@ -45,8 +45,8 @@ const Input = (props: InputProps) => {
             : "border-gray-200 focus:ring-primary"
         } ${
           props.isBtn
-            ? "cursor-pointer inline-block px-5 py-2 text-white bg-primary w-[65%] mx-auto text-center my-4"
-            : " px-3 py-2 bg-gray-200 text-primary text-opacity-80"
+            ? "cursor-pointer inline-block px-3 py-2 text-white bg-primary w-[65%] mx-auto text-center my-2"
+            : "px-3 py-2 bg-gray-200 text-primary text-opacity-80"
         } rounded-sm focus:border-none focus:outline-none focus:shadow-lg focus:ring-1 ${
           props.inputClass && props.inputClass
         } w-full`}

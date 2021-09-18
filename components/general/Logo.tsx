@@ -8,14 +8,14 @@ export interface LogoProps {
 }
 const Logo = ({ size = "small" }: LogoProps) => {
   return (
-    <div className={`${size === "small" ? "h-16 w-16" : "h-24 w-24"}`}>
+    <div className={`${size === "small" ? "h-16 w-16" : "h-28 w-28"}`}>
       <Link href="/">
         <a>
           <Image
             className="object-contain"
             src="/assets/images/logo.png"
-            height={`${size === "small" ? "310" : "510"}`}
-            width={`${size === "small" ? "310" : "510"}`}
+            height={`${size === "small" ? "310" : "610"}`}
+            width={`${size === "small" ? "310" : "610"}`}
           />
         </a>
       </Link>

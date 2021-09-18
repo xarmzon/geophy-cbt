@@ -62,6 +62,7 @@ const Students = () => {
   const handleSearch = async (val: string) => {
     resetMessage();
     setSearchVal(val);
+    //setPage(prev=>1);
   };
   const handleEdit = (id: string) => {
     resetMessage();
@@ -76,12 +77,34 @@ const Students = () => {
       setSubmitText((prev) => "Update");
     }
   };
+
+  const handleDeleteAll = async (e) => {
+    resetMessage();
+    if (confirm("Are you sure?")) {
+      try {
+        setLoading((prev) => true);
+        const { data } = await api.delete(
+          `${ROUTES.API.STUDENT}?delete_=${"many"}`
+        );
+        mutate(`${ROUTES.API.STUDENT}?search=${searchVal}&page=${0}`);
+        setMessage((prev) => ({ msg: data.msg, type: "success" }));
+      } catch (e) {
+        setMessage((prev) => ({ msg: errorMessage(e), type: "error" }));
+      } finally {
+        setLoading((prev) => false);
+      }
+    }
+  };
+
   const handleDelete = async (id: string) => {
     resetMessage();
     if (confirm("Are you sure?")) {
       try {
         setLoading((prev) => true);
-        const { data } = await api.delete(`${ROUTES.API.STUDENT}/${id}`);
+        const { data } = await api.delete(
+          `${ROUTES.API.STUDENT}?id=${id}&delete_=${"one"}`
+        );
+        mutate(`${ROUTES.API.STUDENT}?search=${searchVal}&page=${0}`);
         setMessage((prev) => ({ msg: data.msg, type: "success" }));
       } catch (error) {
         setMessage((prev) => ({ msg: errorMessage(error), type: "error" }));
@@ -110,6 +133,7 @@ const Students = () => {
       },
       complete: async function (results) {
         try {
+          console.log(results);
           const { data: upload } = await api.post(ROUTES.API.STUDENT, {
             students: results.data,
             type: "upload",
@@ -282,7 +306,7 @@ const Students = () => {
                 required
               /> */}
               {/* <Input name="submit" type="submit" value={submitText} isBtn /> */}
-              <div className="p-5 flex justify-center">
+              <div className="p-5 flex flex-col justify-center">
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleStudentsUpload(e)
@@ -302,6 +326,12 @@ const Students = () => {
                   className="-mt-5 border-1 border-primary border-dotted p-5 text-primary text-center cursor-pointer"
                 >
                   {loading ? "Loading..." : "Upload Students"}
+                </p>
+                <p
+                  onClick={handleDeleteAll}
+                  className="mt-3 border-1 border-primary border-dotted p-5 text-primary text-center cursor-pointer"
+                >
+                  {loading ? "Loading..." : "Delete All Students"}
                 </p>
               </div>
             </form>
@@ -329,6 +359,11 @@ const Students = () => {
                           d.phoneNumber,
                           d.department,
                           d.faculty,
+                          <p>
+                            {d.courseSelections.split(";").map((d, i) => (
+                              <p key={i}>{d}</p>
+                            ))}
+                          </p>,
                           dateformat(d.createdAt, "mediumDate"),
                         ],
                       })),

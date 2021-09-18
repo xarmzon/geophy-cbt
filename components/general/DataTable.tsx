@@ -136,7 +136,7 @@ const DataTable = ({
                           {d2}
                         </td>
                       ))}
-                      <td className="flex flex-col justify-center items-center space-y-3 mt-2">
+                      <td className="flex flex-col justify-center space-y-3 mt-2">
                         {showEdit && (
                           <button
                             className="text-primary border-0 px-2 py-1 uppercase shadow-md"

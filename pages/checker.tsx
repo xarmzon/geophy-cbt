@@ -1,0 +1,127 @@
+import { useState, useRef, useEffect } from "react";
+import { NextSeo } from "next-seo";
+import Input from "../components/controls/Input";
+import Footer from "../components/general/Footer";
+import Logo from "../components/general/Logo";
+import { IRegRes } from "../components/dashboard/AuthForm";
+import Alert from "../components/general/Alert";
+
+interface IData {
+  value: string;
+  error: string;
+}
+const sText = "Check My Results";
+const ResultChecker = () => {
+  const msgRef = useRef<HTMLDivElement | undefined>();
+
+  const [resultsData, setResultsData] = useState("");
+  const [jambOrEmail, setJambOrEmail] = useState<IData>({
+    value: "",
+    error: "",
+  });
+  const [submitText, setSubmitText] = useState<string>(sText);
+  const [resMsg, setResMsg] = useState<IRegRes>({
+    type: "error",
+    msg: "",
+  });
+  const handleResMsg = () => {
+    if (resMsg.msg.length > 0) setResMsg((prev) => ({ ...prev, msg: "" }));
+  };
+  const resetFormError = () => {
+    if (jambOrEmail.error.length > 0)
+      setJambOrEmail((prev) => ({ ...prev, error: "" }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    resetFormError();
+    handleResMsg();
+    switch (submitText) {
+      case sText:
+        console.log(jambOrEmail);
+        break;
+      default:
+        return;
+    }
+  };
+  return (
+    <>
+      <NextSeo title="Results Checker" />
+      <div className="bg-book bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-[3px] flex flex-col items-center justify-center min-h-screen p-5">
+        <Logo size="large" />
+        <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
+          <h1 className="text-center text-primary text-xl font-bold pt-3 mb-2">
+            Check My Results
+          </h1>
+          <div className="my-4">
+            {resMsg.msg.length > 0 && (
+              <div ref={msgRef} tabIndex={-1} className="my-4">
+                <Alert type={resMsg.type}>{resMsg.msg}</Alert>
+              </div>
+            )}
+          </div>
+          <div className="mt-5 w-full">
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              <Input
+                placeholder="JAMB Reg. No./Email"
+                showLabel
+                name="jambOrEmail"
+                labelValue="JAMB Reg. No./Email"
+                value={jambOrEmail.value}
+                onChange={(e) =>
+                  setJambOrEmail((prev) => ({
+                    value: e.target.value,
+                    error: "",
+                  }))
+                }
+                error={jambOrEmail.error}
+              />
+              <Input type="submit" name="submit" value={submitText} isBtn />
+            </form>
+          </div>
+          <div className="overflow-x-auto mt-10">
+            <h1 className="text-lg px-3 font-bold text-center mb-4">
+              MSSN Mock Exam Results Notification
+            </h1>
+            <div className="px-3">
+              <div className="text-secondary space-y-2 mb-5">
+                <p className="flex">
+                  <span className="w-2/5 flex-shrink-0"> Name: </span>
+                  <span className="3/5 flex-shrink-0 font-bold px-3 flex-wrap">
+                    Adelola Kayode Samson
+                  </span>
+                </p>
+                <p className="flex">
+                  <span className="w-2/5 flex-shrink-0">JAMB Reg.:</span>
+                  <span className="3/5 flex-shrink-0 font-bold px-3">
+                    23568745AD
+                  </span>
+                </p>
+                <p className="flex">
+                  <span className="w-2/5 flex-shrink-0"> Department: </span>
+                  <span className="3/5 flex-shrink-0 font-bold px-3">
+                    Mathematics
+                  </span>
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold text-lg text-secondary">Results</h4>
+                <ul className="my-4">
+                  <li className="space-x-4">
+                    <span className="">MAT411</span>
+                    <span className="font-bold ">45%</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="text-gray-200 mt-9 max-w-md mx-auto text-center">
+          <Footer />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ResultChecker;

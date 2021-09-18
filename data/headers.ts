@@ -68,6 +68,9 @@ export const studentDataTableHeader: IHeader[] = [
     value: "Faculty",
   },
   {
+    value: "Course Registered",
+  },
+  {
     value: "Date Added",
   },
 ];
