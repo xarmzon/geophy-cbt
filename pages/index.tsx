@@ -36,7 +36,7 @@ const Home = ({ courses }) => {
           below.
           <LinkButton
             href={ROUTES.RESULTS_CHECKER}
-            txt=" OR check your results Here"
+            txt=" OR check your results here"
             type={ETypes.TEXT}
           />
           {/* Then follow by the type of exam you want to do. */}
