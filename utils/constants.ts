@@ -21,6 +21,7 @@ export const ROUTES = {
   COURSES: "/courses",
   STUDENTS: "/students",
   RESULTS: "/results",
+  RESULTS_CHECKER: "/checker",
   ADD_QUESTIONS: "/course/[id]/questions",
   EXAM: "/exam/[id]",
   EXAM_SUMMARY: "/exam/[id]/summary",

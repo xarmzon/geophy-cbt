@@ -28,14 +28,17 @@ const Home = ({ courses }) => {
           <span className="font-bold text-primary text-2xl md:text-3xl inline-block pt-2">
             {APP_NAME}
             <br />{" "}
-            <span className="text-lg md:text-xl">
-              Mock Examination Portal
-            </span>
+            <span className="text-lg md:text-xl">Mock Examination Portal</span>
           </span>
         </h1>
         <p className="text-sm text-center text-secondary">
           In order to have access to the questions, please provide the details
           below.
+          <LinkButton
+            href={ROUTES.RESULTS_CHECKER}
+            txt=" OR check your results Here"
+            type={ETypes.TEXT}
+          />
           {/* Then follow by the type of exam you want to do. */}
         </p>
         <LoginForm courses={coursesData} />
