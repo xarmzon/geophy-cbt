@@ -70,12 +70,16 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
   //console.log(students[0]);
   const studentsToInsert = students.map((d) => {
     const email = d["Username"] ? d["Username"].toLowerCase() : "no_email";
-    let fullName = d["Surname"] ? toTitleCase(d["Surname"].trim()) : "---";
-    fullName +=
-      " " + d["First name"] ? toTitleCase(d["First name"].trim()) : "---";
-    fullName +=
-      " " + d["Other names"] ? toTitleCase(d["Other names"].trim()) : "---";
 
+    const surname = d["Surname"] ? toTitleCase(d["Surname"].trim()) : "---";
+    const firstName = d["First name"]
+      ? toTitleCase(d["First name"].trim())
+      : "---";
+    const otherNames = d["Other names"]
+      ? toTitleCase(d["Other names"].trim())
+      : "---";
+
+    const fullName = surname + " " + firstName + " " + otherNames;
     const jamb = d["JAMB Registration Number"]
       ? d["JAMB Registration Number"].toUpperCase()
       : "---------";
