@@ -77,9 +77,11 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
       : "---";
     const otherNames = d["Other names"]
       ? toTitleCase(d["Other names"].trim())
-      : "---";
+      : "";
 
-    const fullName = surname + " " + firstName + " " + otherNames;
+    let fullName = surname + " " + firstName;
+    if (otherNames) fullName = fullName + " " + otherNames;
+
     const jamb = d["JAMB Registration Number"]
       ? d["JAMB Registration Number"].toUpperCase()
       : "---------";
