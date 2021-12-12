@@ -69,22 +69,42 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
 
   //console.log(students[0]);
   const studentsToInsert = students.map((d) => {
+    const email = d["Username"] ? d["Username"].toLowerCase() : "no_email";
+    let fullName = d["Surname"] ? toTitleCase(d["Surname"].trim()) : "---";
+    fullName +=
+      " " + d["First name"] ? toTitleCase(d["First name"].trim()) : "---";
+    fullName +=
+      " " + d["Other names"] ? toTitleCase(d["Other names"].trim()) : "---";
+
+    const jamb = d["JAMB Registration Number"]
+      ? d["JAMB Registration Number"].toUpperCase()
+      : "---------";
+    const faculty = d["Faculty"]
+      ? toTitleCase(d["Faculty"].trim())
+      : "----------";
+    const department = d["Department"]
+      ? toTitleCase(d["Department"].trim())
+      : "--------";
+
+    const courseSelections = d["Course Selections"]
+      ? d["Course Selections"]
+      : d["Course Applied for"]
+      ? d["Course Applied for"]
+      : "-------";
+
+    const phoneNumber = d["Phone Number"]
+      ? d["Phone Number"].length < 11
+        ? "0" + d["Phone Number"]
+        : d["Phone Number"]
+      : "00000000000";
     return {
-      email: d["Username"].toLowerCase(),
-      fullName:
-        toTitleCase(d["Surname"].trim()) +
-        " " +
-        toTitleCase(d["First name"].trim()) +
-        " " +
-        toTitleCase(d["Other names"].trim()),
-      jamb: d["JAMB Registration Number"].toUpperCase(),
-      faculty: toTitleCase(d["Faculty"].trim()),
-      department: toTitleCase(d["Department"].trim()),
-      courseSelections: d["Course Selections"],
-      phoneNumber:
-        d["Phone Number"].length < 11
-          ? "0" + d["Phone Number"]
-          : d["Phone Number"],
+      email,
+      fullName,
+      jamb,
+      faculty,
+      department,
+      courseSelections,
+      phoneNumber,
     };
   });
 

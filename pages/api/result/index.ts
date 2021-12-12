@@ -51,7 +51,6 @@ const getResults = async (req: NextApiRequest, res: NextApiResponse) => {
     ? (req.query.search as string)
     : "";
 
-  //console.log(searchTerm);
   const filter = {
     match: null,
   };
@@ -62,7 +61,6 @@ const getResults = async (req: NextApiRequest, res: NextApiResponse) => {
         { phoneNumber: { $regex: searchTerm } },
       ],
     };
-    //page = 0;
   }
   const pg = await getResultsData(page, limit, filter);
 
@@ -76,52 +74,7 @@ export const getResultsData = async (
 ) => {
   const { limit, offset } = getPagination(page, perPage);
 
-  //console.log(modelOptions);
-
-  // const pipelines = [
-  //   {
-  //     $lookup: {
-  //       from: "courses",
-  //       localField: "course",
-  //       foreignField: "_id",
-  //       as: "course",
-  //     },
-  //   },
-  //   {
-  //     $unwind: "$course",
-  //   },
-  //   {
-  //     $lookup: {
-  //       from: "students",
-  //       localField: "student",
-  //       foreignField: "_id",
-  //       as: "student",
-  //     },
-  //   },
-  //   {
-  //     $unwind: "$student",
-  //   },
-  //   { $match: modelOptions?.match ? modelOptions.match : {} },
-  //   {
-  //     $sort: { createdAt: -1 },
-  //   },
-  //   { $skip: offset },
-  //   { $limit: limit },
-  //   {
-  //     $project: {
-  //       _id: 1,
-  //       student: { fullName: 1, phoneNumber: 1 },
-  //       course: { title: 1 },
-  //       createdAt: 1,
-  //       score: {
-  //         $cond: [{ $gte: ["$score", 0] }, "$score", "0"],
-  //       },
-  //       status: {
-  //         $cond: [{ $gt: ["$score", -1] }, "Submitted", "Not Submitted"],
-  //       },
-  //     },
-  //   },
-  // ];
+  
   const pipelines = [
     {
       $match: modelOptions?.match ? modelOptions.match : {},
@@ -262,7 +215,6 @@ const updateResult = async (req: NextApiRequest, res: NextApiResponse) => {
 
   examData.score = studentScore;
 
-  //console.log(examData);
   await examData.save();
 
   return res.status(200).json({ msg: MESSAGES.EXAM_SUCCESSFUL });
@@ -282,7 +234,6 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
   const { reg } = req.body;
   if (!reg) return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
-  //console.log(reg);
   const pipelines = [
     {
       $match: {
