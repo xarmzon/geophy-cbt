@@ -141,7 +141,9 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
     .map((d, i) => d.split(" ").join("").toLowerCase())
     .includes(courseData.title.split(" ").join("").toLowerCase());
 
-  if (!isStudentCourse)
+  const isMockExam = courseData.title.toLowerCase().includes("MCK 100");
+
+  if (!isStudentCourse && !isMockExam)
     return res.status(400).json({ msg: MESSAGES.CANT_REGISTER_EXAM });
 
   const startDiff: number = +new Date(courseData.startDate) - +new Date();
