@@ -130,32 +130,33 @@ const ResultChecker = () => {
                       {resultsData.jamb}
                     </span>
                   </p>
-                  <p className="flex">
-                    <span className="w-2/5 flex-shrink-0"> Department: </span>
-                    <span className="3/5 flex-shrink-0 font-bold px-3">
-                      {resultsData.department}
-                    </span>
-                  </p>
+                  {resultsData.department !== "--------" && (
+                    <p className="flex">
+                      <span className="w-2/5 flex-shrink-0"> Department: </span>
+                      <span className="3/5 flex-shrink-0 font-bold px-3">
+                        {resultsData.department}
+                      </span>
+                    </p>
+                  )}
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-secondary">Results</h4>
                   <ul className="mb-5">
                     {resultsData.results.map((d, i) => (
-                      <li key={i} className="mb-2 space-x-4">
-                        <span className="">{d.course}</span>
-                        <span
-                          className={`font-bold ${
-                            d.score >= 70
-                              ? "text-green-600"
-                              : d.score < 70 && d.score >= 60
-                              ? "text-secondary"
-                              : d.score < 60 && d.score >= 50
-                              ? "text-ascent"
-                              : "text-red-600"
-                          }`}
-                        >
-                          {d.score}%
-                        </span>
+                      <li
+                        key={i}
+                        className={`mb-2 space-x-4 font-bold ${
+                          d.score >= 70
+                            ? "text-green-600"
+                            : d.score < 70 && d.score >= 60
+                            ? "text-secondary"
+                            : d.score < 60 && d.score >= 50
+                            ? "text-ascent"
+                            : "text-red-600"
+                        }`}
+                      >
+                        <span>{d.course}</span>
+                        <span>{d.score}%</span>
                       </li>
                     ))}
                   </ul>

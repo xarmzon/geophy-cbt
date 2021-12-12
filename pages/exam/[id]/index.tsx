@@ -137,12 +137,14 @@ const ExamPage = ({
                   </span>
                   {student.fullName}
                 </p>
-                <p>
-                  <span className="font-bold text-primary inline-block pr-3">
-                    Department:{" "}
-                  </span>
-                  {student.department}
-                </p>
+                {student.department !== "--------" && (
+                  <p>
+                    <span className="font-bold text-primary inline-block pr-3">
+                      Department:{" "}
+                    </span>
+                    {student.department}
+                  </p>
+                )}
                 <p>
                   <span className="font-bold text-primary inline-block pr-3">
                     Phone Number:{" "}
@@ -184,6 +186,13 @@ const ExamPage = ({
                     txt="Pick Another Course"
                     type={ETypes.PRIMARY}
                     rounded
+                  />
+                </p>
+                <p>
+                  <LinkButton
+                    href="/checker"
+                    txt="Or check Result Here"
+                    type={ETypes.TEXT}
                   />
                 </p>
               </div>
