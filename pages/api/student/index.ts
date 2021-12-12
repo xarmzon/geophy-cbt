@@ -141,10 +141,8 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
     .map((d, i) => d.split(" ").join("").toLowerCase())
     .includes(courseData.title.split(" ").join("").toLowerCase());
 
-  const isMockExam = courseData.title.toLowerCase().includes("MCK 100");
+  const isMockExam = courseData.title.includes("MCK 100");
 
-  console.log(isMockExam);
-  console.log(isStudentCourse);
   if (!isStudentCourse && !isMockExam)
     return res.status(400).json({ msg: MESSAGES.CANT_REGISTER_EXAM });
 
