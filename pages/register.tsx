@@ -44,7 +44,7 @@ const RegisterPage = () => {
     },
     courses: {
       error: "",
-      value: [],
+      values: [],
     },
   });
 
