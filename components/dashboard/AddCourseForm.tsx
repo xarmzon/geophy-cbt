@@ -113,6 +113,7 @@ const AddCourseForm = ({
           });
           setCourseId(data.course._id);
           setSubmitText("Add Questions");
+          mutate();
           //resetFormData();
         } catch (e) {
           setSubmitText("Add Course");
@@ -212,7 +213,8 @@ const AddCourseForm = ({
           value={formData.questionNum}
           name="questionNum"
           showLabel
-          type="number"
+          type="text"
+          inputMode="numeric"
           min="5"
           labelValue="Number of Questions"
           placeholder="Eg: 20"
@@ -224,7 +226,8 @@ const AddCourseForm = ({
           value={formData.optionNum}
           name="optionNum"
           showLabel
-          type="number"
+          type="text"
+          inputMode="numeric"
           labelValue="Number of Options"
           placeholder="Eg: 4 for ABCD"
           required
@@ -257,7 +260,8 @@ const AddCourseForm = ({
           value={formData.timeAllowed}
           name="timeAllowed"
           showLabel
-          type="number"
+          type="text"
+          inputMode="numeric"
           min="0"
           labelValue="Time Allowed(min)"
           placeholder="Eg: 30"

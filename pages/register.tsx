@@ -24,6 +24,7 @@ export interface FormDataProps {
 }
 
 const RegisterPage = () => {
+  const [canRegister, _] = useState<boolean>(true);
   const [formData, setFormData] = useState<FormDataProps>({
     jamb: {
       error: "",
@@ -88,91 +89,97 @@ const RegisterPage = () => {
             below.
           </p>
 
-          <form
-            onSubmit={handleSubmit}
-            className="w-full flex flex-col space-y-3"
-          >
-            <Input
-              name="jamb"
-              value={formData.jamb.value}
-              error={formData.jamb.error}
-              showLabel
-              labelValue="Matric/JAMB Reg. No:"
-              placeholder="Eg: 71483233AD"
-              minLength={10}
-              maxLength={10}
-              onChange={(e) => {
-                handleChange(e.target.name, e.target.value);
-              }}
-              required
-            />
-            <Input
-              name="fullName"
-              value={formData.fullName.value}
-              error={formData.fullName.error}
-              showLabel
-              labelValue="Full Name"
-              placeholder="E.g Adelola Kayode Samson"
-              onChange={(e) => {
-                handleChange(e.target.name, e.target.value);
-              }}
-              required
-            />
-            <Input
-              name="department"
-              value={formData.department.value}
-              error={formData.department.error}
-              showLabel
-              labelValue="Department"
-              placeholder="E.g Mathematics"
-              onChange={(e) => {
-                handleChange(e.target.name, e.target.value);
-              }}
-              required
-            />
-            <Input
-              name="phoneNumber"
-              value={formData.phoneNumber.value}
-              error={formData.phoneNumber.error}
-              showLabel
-              labelValue="Phone Number"
-              placeholder="E.g 08141161177"
-              type="tel"
-              inputMode="tel"
-              onChange={(e) => {
-                handleChange(e.target.name, e.target.value);
-              }}
-              required
-            />
-            <div className="flex flex-col gap-2">
-              <label htmlFor="" className="text-sm md:text-md">
-                Choose Your Courses
-              </label>
-              <div className="flex flex-col gap-3 items-start">
-                <label
-                  htmlFor="MAT411"
-                  className="flex items-center gap-1 text-secondary"
-                >
-                  <input
-                    name="courses"
-                    type="checkbox"
-                    id={`MAT411`}
-                    onChange={(e) => {
-                      console.log(e.target);
-                    }}
-                    className="border border-primary ring-0 focus:ring-0 text-primary rounded"
-                  />
-                  MAT411
-                </label>
-              </div>
-              <MessageBox
-                msg={formData.courses.error}
-                type="error"
-                show={Boolean(formData.courses.error)}
+          {canRegister ? (
+            <form
+              onSubmit={handleSubmit}
+              className="w-full flex flex-col space-y-3"
+            >
+              <Input
+                name="jamb"
+                value={formData.jamb.value}
+                error={formData.jamb.error}
+                showLabel
+                labelValue="Matric/JAMB Reg. No:"
+                placeholder="Eg: 71483233AD"
+                minLength={10}
+                maxLength={10}
+                onChange={(e) => {
+                  handleChange(e.target.name, e.target.value);
+                }}
+                required
               />
-            </div>
-            <Input type="submit" name="submit" value="Register" isBtn />
-          </form>
+              <Input
+                name="fullName"
+                value={formData.fullName.value}
+                error={formData.fullName.error}
+                showLabel
+                labelValue="Full Name"
+                placeholder="E.g Adelola Kayode Samson"
+                onChange={(e) => {
+                  handleChange(e.target.name, e.target.value);
+                }}
+                required
+              />
+              <Input
+                name="department"
+                value={formData.department.value}
+                error={formData.department.error}
+                showLabel
+                labelValue="Department"
+                placeholder="E.g Mathematics"
+                onChange={(e) => {
+                  handleChange(e.target.name, e.target.value);
+                }}
+                required
+              />
+              <Input
+                name="phoneNumber"
+                value={formData.phoneNumber.value}
+                error={formData.phoneNumber.error}
+                showLabel
+                labelValue="Phone Number"
+                placeholder="E.g 08141161177"
+                type="tel"
+                inputMode="tel"
+                onChange={(e) => {
+                  handleChange(e.target.name, e.target.value);
+                }}
+                required
+              />
+              <div className="flex flex-col gap-2">
+                <label htmlFor="" className="text-sm md:text-md">
+                  Choose Your Courses
+                </label>
+                <div className="flex flex-col gap-3 items-start">
+                  <label
+                    htmlFor="MAT411"
+                    className="flex items-center gap-1 text-secondary"
+                  >
+                    <input
+                      name="courses"
+                      type="checkbox"
+                      id={`MAT411`}
+                      onChange={(e) => {
+                        console.log(e.target);
+                      }}
+                      className="border border-primary ring-0 focus:ring-0 text-primary rounded"
+                    />
+                    MAT411
+                  </label>
+                </div>
+                <MessageBox
+                  msg={formData.courses.error}
+                  type="error"
+                  show={Boolean(formData.courses.error)}
+                />
+              </div>
+              <Input type="submit" name="submit" value="Register" isBtn />
+            </form>
+          ) : (
+            <h3 className="!mt-5 md:!mt-14 text-xl text-red-600 font-bold text-center">
+              Registration Closed
+            </h3>
+          )}
         </div>
         <div className="text-gray-200 mt-6 max-w-md mx-auto text-center">
           <Footer />

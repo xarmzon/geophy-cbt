@@ -14,7 +14,7 @@
 }
 
 #nprogress .bar {
-  @apply bg-ascent-light;
+  background: #c0e342;
 }
 
 /* #nprogress .peg {

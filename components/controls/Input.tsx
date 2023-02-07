@@ -19,7 +19,15 @@ export interface InputProps {
   minLength?: number | undefined;
   min?: string;
   max?: string;
-  inputMode?: string;
+  inputMode?:
+    | "search"
+    | "text"
+    | "email"
+    | "none"
+    | "tel"
+    | "url"
+    | "numeric"
+    | "decimal";
   rightIcon?: any;
   leftIcon?: any;
   id?: string;

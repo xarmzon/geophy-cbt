@@ -267,6 +267,7 @@ const AuthForm = () => {
       <div className="mt-5 text-center text-sm text-ascent hover:text-ascent-light">
         {formType === "login" ? (
           <p
+            className="cursor-pointer"
             onClick={() => {
               setFormType("");
               setSubmitText("Register");
@@ -277,6 +278,7 @@ const AuthForm = () => {
           </p>
         ) : (
           <p
+            className="cursor-pointer"
             onClick={() => {
               setFormType("login");
               setSubmitText("Login");

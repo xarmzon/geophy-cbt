@@ -107,6 +107,7 @@ const ResultChecker = () => {
                   }))
                 }
                 error={jambOrEmail.error}
+                required
               />
               <Input type="submit" name="submit" value={submitText} isBtn />
             </form>
