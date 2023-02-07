@@ -33,7 +33,7 @@ const Select = (props: SelectProps) => {
       <select
         name={props.name}
         required={props.required ? true : false}
-        className="bg-gray-200 border-none"
+        className="bg-gray-200 border border-transparent focus:border-primary focus:ring-0"
         onChange={(e) => props.onChange(e.target.value)}
       >
         <option value={props.default ? props.default.value : ""}>

@@ -5,8 +5,8 @@ import MessageBox from "../general/MessageBox";
 // }
 export interface InputProps {
   showLabel?: boolean;
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
   placeholder?: string;
   error?: string;
   labelValue?: string;
@@ -19,8 +19,10 @@ export interface InputProps {
   minLength?: number | undefined;
   min?: string;
   max?: string;
+  inputMode?: string;
   rightIcon?: any;
   leftIcon?: any;
+  id?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -39,7 +41,7 @@ const Input = (props: InputProps) => {
       )}
       <input
         type={props.type || "text"}
-        className={`${
+        className={` ${
           props.error && props.error.length > 0
             ? "border-red-600 focus:ring-red-600"
             : "border-gray-200 focus:ring-primary"
@@ -47,7 +49,7 @@ const Input = (props: InputProps) => {
           props.isBtn
             ? "cursor-pointer inline-block px-3 py-2 text-white bg-primary w-[65%] mx-auto text-center my-2"
             : "px-3 py-2 bg-gray-200 text-primary text-opacity-80"
-        } rounded-sm focus:border-none focus:outline-none focus:shadow-lg focus:ring-1 ${
+        } rounded-sm focus:border-transparent focus:outline-none focus:ring-1 ${
           props.inputClass && props.inputClass
         } w-full`}
         name={props.name}
@@ -59,6 +61,8 @@ const Input = (props: InputProps) => {
         minLength={props.minLength || undefined}
         max={props.max || undefined}
         min={props.min || undefined}
+        inputMode={props.inputMode}
+        id={props.id}
       />
       <MessageBox
         msg={props.error || ""}

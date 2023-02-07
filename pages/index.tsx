@@ -21,7 +21,7 @@ const Home = ({ courses }) => {
       : [];
   });
   return (
-    <div className="bg-book bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center min-h-screen p-5">
+    <div className="bg-senateBuilding bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center min-h-screen p-5">
       <NextSeo title="Home" />
       <div className="mt-5 mb-1 w-full flex justify-center">
         <Logo size="large" />
@@ -48,11 +48,18 @@ const Home = ({ courses }) => {
         <LoginForm courses={coursesData} />
         <div className="mt-4 w-full text-center">
           <LinkButton
+            href={ROUTES.REGISTRATION}
+            txt="Students Registration"
+            type={ETypes.TEXT}
+            color=""
+          />
+          |
+          <LinkButton
             href={ROUTES.DASHBOARD}
             txt="Administrator"
             type={ETypes.TEXT}
             color=""
-          />
+          />{" "}
         </div>
       </div>
       <div className="text-gray-200 mt-6 max-w-md mx-auto text-center">

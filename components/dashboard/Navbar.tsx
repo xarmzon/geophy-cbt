@@ -1,7 +1,9 @@
+import { APP_NAME } from "../../utils/constants";
+
 const Navbar = () => {
   return (
-    <div className="bg-gray-100 ring-2 ring-secondary h-10 w-10 rounded-full flex items-center justify-center text-primary text-xs md:text-sm font-bold">
-      MSSN
+    <div className="text-white cursor-pointer px-2 h-10 flex items-center justify-center text-xs md:text-sm font-bold">
+      {APP_NAME}
     </div>
   );
 };

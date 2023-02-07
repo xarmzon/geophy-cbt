@@ -1,6 +1,6 @@
-export const APP_NAME: string = `MSSN Unilorin Branch`;
+export const APP_NAME: string = `NAPHSS Unilorin Chapter`;
 export const RASTAARC = {
-  GITHUB: "https://www.github.com/rastaarc",
+  GITHUB: "https://www.github.com/xarmzon",
   TWITTER: "https://www.twitter.com/rastaarcl",
 };
 export const ENTITY_NUMBERS = {
@@ -20,6 +20,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   COURSES: "/courses",
   STUDENTS: "/students",
+  REGISTRATION: "/register",
   RESULTS: "/results",
   RESULTS_CHECKER: "/checker",
   ADD_QUESTIONS: "/course/[id]/questions",
@@ -70,7 +71,7 @@ export const MESSAGES = {
   UNKNOWN_ERROR: "Unknown Error occurred. Please try again",
   INVALID_USERNAME: "Invalid Username supplied. Please choose another one",
   INVALID_EMAIL: "Invalid Email supplied. Please try again",
-  LOGIN_SUC: "Account Loggedin successfully",
+  LOGIN_SUC: "Account Logged-in successfully",
   LOGIN_ERR: "Sorry, Your username or password is incorrect",
   INVALID_EXAM: "Sorry, We can't find the Exam data with the supplied details",
   NO_RESULT: "Sorry, We can't find any Result with the details supplied",
@@ -118,4 +119,4 @@ export const MESSAGES = {
   },
 };
 
-export const DESCRIPTIONS: string = `Muslim Students Society of Nigeria, Unilorin Branch Mock Examination Portal`;
+export const DESCRIPTIONS: string = `Nigerian Association of Physical Sciences Students Unilorin Chapter Mock Examination Portal created by `;

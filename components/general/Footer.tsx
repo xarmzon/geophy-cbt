@@ -14,7 +14,7 @@ const Footer = () => {
         &copy;{new Date().getFullYear()}, {APP_NAME}. All Right Reserved.
         Crafted and Developed by{" "}
         <a
-          className="hover:text-ascent-light text-ascent inline-block"
+          className="text-[#e5e046] hover:underline inline-block"
           href={RASTAARC.GITHUB}
           target="_blank"
         >

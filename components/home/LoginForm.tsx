@@ -147,7 +147,8 @@ const LoginForm = ({ courses }) => {
           value={formData.jamb.value}
           error={formData.jamb.error}
           showLabel
-          labelValue="JAMB Reg. No:"
+          labelValue="Matric/JAMB Reg. No:"
+          placeholder="Enter Your Registration Number"
           minLength={10}
           maxLength={10}
           onChange={(e) => {
@@ -161,6 +162,7 @@ const LoginForm = ({ courses }) => {
           type="tel"
           showLabel
           labelValue="Phone Number"
+          placeholder="Enter Your Phone Number"
           error={formData.phoneNumber.error}
           minLength={11}
           maxLength={11}

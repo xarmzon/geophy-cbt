@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
-  if (mongoose.connections[0].readState) {
+  if (mongoose.connections[0].readyState) {
     console.log("Already connected");
     return;
   }
