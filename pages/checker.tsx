@@ -115,7 +115,7 @@ const ResultChecker = () => {
           {resultsData && submitText !== "Loading..." && (
             <div className="overflow-x-auto mt-10">
               <h1 className="text-lg px-3 font-bold text-center mb-4">
-                MSSN Mock Exam Results Notification
+                NAPHSS Mock Exam Results Notification
               </h1>
               <div className="px-3">
                 <div className="text-secondary space-y-2 mb-5">
