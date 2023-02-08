@@ -19,8 +19,6 @@ interface IFormData {
   fullName: string;
   phoneNumber: string;
   department: string;
-  faculty: string;
-  email: string;
   jamb: string;
   courseSelections: string;
 }
@@ -37,8 +35,6 @@ const Students = () => {
     phoneNumber: "",
     jamb: "",
     department: "",
-    email: "",
-    faculty: "",
     courseSelections: "",
   });
   const [formData, setFormData] = useState<IFormData>({
@@ -46,8 +42,6 @@ const Students = () => {
     phoneNumber: "",
     jamb: "",
     department: "",
-    email: "",
-    faculty: "",
     courseSelections: "",
   });
   const [resMsg, setResMsg] = useState<IRegRes>({
@@ -88,8 +82,6 @@ const Students = () => {
       setFormData((prev) => ({
         fullName: data.fullName,
         phoneNumber: data.phoneNumber,
-        email: data.email,
-        faculty: data.faculty,
         department: data.department,
         jamb: data.jamb,
         courseSelections: data.courseSelections,
@@ -193,8 +185,6 @@ const Students = () => {
     setFormDataError((prev) => ({
       fullName: "",
       phoneNumber: "",
-      email: "",
-      faculty: "",
       department: "",
       jamb: "",
       courseSelections: "",
@@ -217,8 +207,6 @@ const Students = () => {
           const { data } = await api.post(ROUTES.API.STUDENT, {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
-            email: formData.email,
-            faculty: formData.faculty,
             department: formData.department,
             jamb: formData.jamb,
             courseSelections: formData.courseSelections,
@@ -227,8 +215,6 @@ const Students = () => {
           setFormData((prev) => ({
             fullName: "",
             phoneNumber: "",
-            email: "",
-            faculty: "",
             department: "",
             jamb: "",
             courseSelections: "",
@@ -269,8 +255,6 @@ const Students = () => {
           const { data: update } = await api.patch(ROUTES.API.STUDENT, {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
-            email: formData.email,
-            faculty: formData.faculty,
             department: formData.department,
             jamb: formData.jamb,
             courseSelections: formData.courseSelections,
@@ -279,8 +263,6 @@ const Students = () => {
           setFormData((prev) => ({
             fullName: "",
             phoneNumber: "",
-            email: "",
-            faculty: "",
             department: "",
             jamb: "",
             courseSelections: "",
@@ -360,19 +342,7 @@ const Students = () => {
                 }
                 required
               />
-              <Input
-                error={formDataError.email}
-                type="email"
-                placeholder="Student Email"
-                showLabel
-                labelValue="Email Address"
-                name="email"
-                value={formData.email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange(e.target.value, e.target.name)
-                }
-                required
-              />
+
               <Input
                 error={formDataError.phoneNumber}
                 type="tel"
@@ -401,19 +371,7 @@ const Students = () => {
                 }
                 required
               />
-              <Input
-                error={formDataError.faculty}
-                type="text"
-                placeholder="Student Faculty"
-                showLabel
-                labelValue="Faculty"
-                name="faculty"
-                value={formData.faculty}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange(e.target.value, e.target.name)
-                }
-                required
-              />
+
               <Input
                 error={formDataError.courseSelections}
                 type="text"
@@ -477,10 +435,9 @@ const Students = () => {
                         values: [
                           d.fullName,
                           d.jamb,
-                          d.email,
                           d.phoneNumber,
                           d.department,
-                          d.faculty,
+
                           <p>
                             {d.courseSelections.split(";").map((d, i) => (
                               <p key={i}>{d}</p>

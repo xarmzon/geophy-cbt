@@ -3,9 +3,7 @@ import { Schema, models, model } from "mongoose";
 export interface IStudent {
   fullName: string;
   phoneNumber: string;
-  email: string;
   jamb: string;
-  faculty: string;
   department: string;
   courseSelections: string;
 }
@@ -19,15 +17,7 @@ const StudentSchema = new Schema<IStudent>(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-    },
     jamb: {
-      type: String,
-      required: true,
-    },
-    faculty: {
       type: String,
       required: true,
     },

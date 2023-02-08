@@ -69,8 +69,6 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
 
   //console.log(students[0]);
   const studentsToInsert = students.map((d) => {
-    const email = d["Username"] ? d["Username"].toLowerCase() : "no_email";
-
     const surname = d["Surname"] ? toTitleCase(d["Surname"].trim()) : "---";
     const firstName = d["First name"]
       ? toTitleCase(d["First name"].trim())
@@ -85,9 +83,6 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
     const jamb = d["JAMB Registration Number"]
       ? d["JAMB Registration Number"].toUpperCase()
       : "---------";
-    const faculty = d["Faculty"]
-      ? toTitleCase(d["Faculty"].trim())
-      : "----------";
     const department = d["Department"]
       ? toTitleCase(d["Department"].trim())
       : "--------";
@@ -104,10 +99,8 @@ const uploadStudents = async (req: NextApiRequest, res: NextApiResponse) => {
         : d["Phone Number"]
       : "00000000000";
     return {
-      email,
       fullName,
       jamb,
-      faculty,
       department,
       courseSelections,
       phoneNumber,
@@ -177,24 +170,9 @@ const addStudentExam = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    fullName,
-    phoneNumber,
-    email,
-    faculty,
-    department,
-    jamb,
-    courseSelections,
-  } = req.body;
-  if (
-    !fullName ||
-    !phoneNumber ||
-    !email ||
-    !faculty ||
-    !department ||
-    !jamb ||
-    !courseSelections
-  )
+  const { fullName, phoneNumber, department, jamb, courseSelections } =
+    req.body;
+  if (!fullName || !phoneNumber || !department || !jamb || !courseSelections)
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   if (!validFullName(fullName) || !validPhoneNumber(phoneNumber))
@@ -208,8 +186,6 @@ const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
     studentData = await Student.create({
       fullName: formatFullName(fullName),
       phoneNumber,
-      email,
-      faculty: toTitleCase(faculty),
       department: toTitleCase(department),
       jamb: jamb.toUpperCase(),
       courseSelections: courseSelections
@@ -275,21 +251,11 @@ const deleteStudents = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    fullName,
-    phoneNumber,
-    id,
-    email,
-    faculty,
-    department,
-    jamb,
-    courseSelections,
-  } = req.body;
+  const { fullName, phoneNumber, id, department, jamb, courseSelections } =
+    req.body;
   if (
     !fullName ||
     !phoneNumber ||
-    !email ||
-    !faculty ||
     !department ||
     !jamb ||
     !courseSelections ||
@@ -306,8 +272,6 @@ const updateStudent = async (req: NextApiRequest, res: NextApiResponse) => {
   studentData.fullName = formatFullName(fullName);
   studentData.phoneNumber = phoneNumber;
   studentData.jamb = jamb;
-  studentData.email = email;
-  studentData.faculty = faculty;
   studentData.department = department;
   studentData.courseSelections = courseSelections;
 
