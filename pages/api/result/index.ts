@@ -74,7 +74,6 @@ export const getResultsData = async (
 ) => {
   const { limit, offset } = getPagination(page, perPage);
 
-  
   const pipelines = [
     {
       $match: modelOptions?.match ? modelOptions.match : {},
@@ -168,7 +167,7 @@ export const getResultsData = async (
     { $limit: limit },
   ];
 
-  const countPiplines = [
+  const countPipelines = [
     ...pipelines.filter(
       (_, i) =>
         i !== pipelines.length - 1 &&
@@ -181,7 +180,7 @@ export const getResultsData = async (
   ];
 
   const items = await Student.aggregate(pipelines).exec();
-  const countQ = (await Student.aggregate(countPiplines).exec())[0];
+  const countQ = (await Student.aggregate(countPipelines).exec())[0];
 
   const totalItems = countQ?.totalItems ? countQ.totalItems : 1;
   const totalPages = Math.ceil(totalItems / limit);
@@ -237,7 +236,7 @@ const resultChecker = async (req: NextApiRequest, res: NextApiResponse) => {
   const pipelines = [
     {
       $match: {
-        $or: [{ jamb: reg.toUpperCase() }, { email: reg.toLowerCase() }],
+        $or: [{ jamb: reg.toUpperCase() }, { phoneNumber: reg }],
       },
     },
     {

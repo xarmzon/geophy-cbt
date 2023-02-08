@@ -95,10 +95,10 @@ const ResultChecker = () => {
           <div className="mt-5 w-full">
             <form className="space-y-8" onSubmit={handleSubmit}>
               <Input
-                placeholder="JAMB Reg. No."
+                placeholder="Enter your JAMB No. or Phone Number"
                 showLabel
                 name="jambOrEmail"
-                labelValue="JAMB Reg. No."
+                labelValue="JAMB Reg. No./Phone"
                 value={jambOrEmail.value}
                 onChange={(e) =>
                   setJambOrEmail((prev) => ({
