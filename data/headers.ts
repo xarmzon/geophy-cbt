@@ -56,16 +56,10 @@ export const studentDataTableHeader: IHeader[] = [
     value: "JAMB No.",
   },
   {
-    value: "Email",
-  },
-  {
     value: "Phone",
   },
   {
     value: "Department",
-  },
-  {
-    value: "Faculty",
   },
   {
     value: "Course Registered",

@@ -179,8 +179,7 @@ const addStudent = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ msg: MESSAGES.BAD_REQUEST });
 
   let studentData = await Student.findOne({
-    fullName: formatFullName(fullName),
-    phoneNumber,
+    $or: [{ fullName: formatFullName(fullName) }, { phoneNumber }, { jamb }],
   });
   if (!studentData) {
     studentData = await Student.create({
