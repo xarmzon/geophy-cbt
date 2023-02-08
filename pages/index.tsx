@@ -31,10 +31,7 @@ const Home = ({ courses }) => {
           WELCOME TO <br />
           <span className="font-bold text-primary text-2xl md:text-4xl inline-block pt-2">
             NAPHSS SENATORS CBT MOCK TEST
-            <br />{" "}
-            {/* <span className="text-lg md:text-xl">
-              
-            </span> */}
+            <br />
           </span>
         </h1>
         <p className="text-sm text-center text-secondary">
@@ -45,7 +42,6 @@ const Home = ({ courses }) => {
             txt=" OR check your results here"
             type={ETypes.TEXT}
           />
-          {/* Then follow by the type of exam you want to do. */}
         </p>
         <LoginForm courses={coursesData} />
         <div className="mt-4 w-full text-center">
