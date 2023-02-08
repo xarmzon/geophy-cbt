@@ -29,10 +29,12 @@ const Home = ({ courses }) => {
       <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
         <h1 className="text-center text-ascent md:text-lg pt-3">
           WELCOME TO <br />
-          <span className="font-bold text-primary text-2xl md:text-3xl inline-block pt-2">
-            {APP_NAME}
+          <span className="font-bold text-primary text-2xl md:text-4xl inline-block pt-2">
+            NAPHSS SENATORS CBT MOCK TEST
             <br />{" "}
-            <span className="text-lg md:text-xl">Mock Examination Portal</span>
+            {/* <span className="text-lg md:text-xl">
+              
+            </span> */}
           </span>
         </h1>
         <p className="text-sm text-center text-secondary">
