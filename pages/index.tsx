@@ -4,11 +4,12 @@ import Footer from "../components/general/Footer";
 import LinkButton, { ETypes } from "../components/general/LinkButton";
 import LoginForm from "../components/home/LoginForm";
 import Course from "../models/CourseModel";
-import { APP_NAME, ROUTES } from "../utils/constants";
+import { ROUTES } from "../utils/constants";
 import { connectDB } from "../utils/database";
 import { SelectOptionProps } from "../components/controls/Select";
 import { useState } from "react";
 import Logo from "../components/general/Logo";
+import Creators from "../components/general/Creators";
 
 export interface ICourse extends SelectOptionProps {}
 
@@ -29,12 +30,13 @@ const Home = ({ courses }) => {
       <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
         <h1 className="text-center text-ascent md:text-lg pt-3">
           WELCOME TO <br />
-          <span className="font-bold text-primary text-2xl md:text-4xl inline-block pt-2">
+          <span className="font-black text-primary text-2xl md:text-4xl inline-block pt-2">
             NAPHSS SENATORS CBT MOCK TEST
             <br />
           </span>
         </h1>
-        <p className="text-sm text-center text-secondary">
+        <Creators />
+        <p className="!mt-12 text-sm text-center text-secondary">
           In order to have access to the questions, please provide the details
           below.
           <LinkButton

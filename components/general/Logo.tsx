@@ -8,7 +8,7 @@ export interface LogoProps {
 }
 const Logo = ({ size = "small" }: LogoProps) => {
   return (
-    <div className={`${size === "small" ? "h-16 w-16" : "h-28 w-28"}`}>
+    <div className={`${size === "small" ? "h-16 w-16" : "h-40 w-52"}`}>
       <Link href="/">
         <a>
           <Image

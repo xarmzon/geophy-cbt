@@ -122,12 +122,16 @@ export const MESSAGES = {
 export const CREATORS: { name: string; avatar: string }[] = [
   {
     name: "Senator Abdussalaam Abidemi ABS",
-    avatar: "/asset/images/abs",
+    avatar: "/assets/images/abs.jpg",
   },
   {
     name: "Senator Oshoko Samiat Oluwapelumi",
-    avatar: "/asset/images/samiat",
+    avatar: "/assets/images/samiat.jpg",
+  },
+  {
+    name: "Senator Adekanbi Illiyaz",
+    avatar: "/assets/images/illiyaz.jpg",
   },
 ];
 
-export const DESCRIPTIONS: string = `Nigerian Association of Physical Sciences Students Unilorin Chapter Mock Examination Portal created by Senators Representing Physical Sciences at the Student Union Level (Senator Oshoko Samiat Oluwapelumi & Senator Abdussalaam Abidemi ABS)`;
+export const DESCRIPTIONS: string = `Nigerian Association of Physical Sciences Students Unilorin Chapter Mock Examination Portal created by Senators Representing Physical Sciences at the Student Union Level (Senator Oshoko Samiat Oluwapelumi, Senator Adekanbi Illiyaz and Senator Abdussalaam Abidemi ABS)`;

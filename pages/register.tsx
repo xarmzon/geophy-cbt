@@ -13,6 +13,7 @@ import Alert from "../components/general/Alert";
 import { IRegRes } from "../components/dashboard/AuthForm";
 import api from "../utils/fetcher";
 import { componentsErrors, errorMessage } from "../utils/errorHandler";
+import Creators from "../components/general/Creators";
 
 export interface DataProps {
   error: string;
@@ -66,7 +67,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
     },
   });
 
-  const coursesData = useMemo(() => {
+  const coursesData = useMemo<string[]>(() => {
     return JSON.parse(courses ?? "[]");
   }, [courses]);
 
@@ -203,7 +204,8 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
               <br />
             </span>
           </h1>
-          <p className="text-sm text-center text-secondary">
+          <Creators />
+          <p className="!mt-8 text-sm text-center text-secondary">
             In order to have access to the questions, please provide the details
             below.
           </p>
