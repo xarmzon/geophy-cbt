@@ -1,4 +1,4 @@
-export const APP_NAME: string = `NAPHSS Unilorin Chapter`;
+export const APP_NAME: string = `Mubzy Mock CBT`;
 export const RASTAARC = {
   GITHUB: "https://www.github.com/xarmzon",
   TWITTER: "https://www.twitter.com/rastaarcl",
