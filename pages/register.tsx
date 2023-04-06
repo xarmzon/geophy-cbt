@@ -192,15 +192,15 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
   return (
     <>
       <NextSeo title="Students Registration" />
-      <div className="bg-senateBuilding bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center min-h-screen p-5">
-        <div className="mt-5 mb-1 w-full flex justify-center">
+      <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-no-repeat bg-cover bg-senateBuilding bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm">
+        <div className="flex justify-center w-full mt-5 mb-1">
           {/* <Logo size="large" /> */}
         </div>
         <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
-          <h1 className="text-center text-ascent md:text-lg pt-3">
+          <h1 className="pt-3 text-center text-ascent md:text-lg">
             STUDENTS REGISTRATION <br />
-            <span className="font-bold text-primary text-2xl md:text-4xl inline-block pt-2">
-              NAPHSS SENATORS CBT MOCK TEST
+            <span className="inline-block pt-2 text-2xl font-bold text-primary md:text-4xl">
+              MUBZY CBT MOCK TEST
               <br />
             </span>
           </h1>
@@ -234,7 +234,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
               )}
               <form
                 onSubmit={handleSubmit}
-                className="w-full flex flex-col space-y-3"
+                className="flex flex-col w-full space-y-3"
               >
                 <Input
                   name="jamb"
@@ -292,7 +292,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
                   <label htmlFor="" className="text-sm md:text-md">
                     Choose Your Courses
                   </label>
-                  <div className="flex flex-wrap gap-3 items-start">
+                  <div className="flex flex-wrap items-start gap-3">
                     {coursesData.map((course: string) => (
                       <label
                         key={course}
@@ -306,7 +306,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
                           onChange={() => {
                             handleChangeCourse(course);
                           }}
-                          className="border border-primary ring-0 focus:ring-0 text-primary rounded"
+                          className="border rounded border-primary ring-0 focus:ring-0 text-primary"
                         />
                         {course}
                       </label>
@@ -327,7 +327,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
             </h3>
           )}
         </div>
-        <div className="text-gray-200 mt-6 max-w-md mx-auto text-center">
+        <div className="max-w-md mx-auto mt-6 text-center text-gray-200">
           <Footer />
         </div>
       </div>
