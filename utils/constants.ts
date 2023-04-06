@@ -127,4 +127,4 @@ export const CREATORS: { name: string; avatar: string; subText?: string }[] = [
   },
 ];
 
-export const DESCRIPTIONS: string = `Nigerian Association of Physical Sciences Students Unilorin Chapter Mock Examination Portal created by Senators Representing Physical Sciences at the Student Union Level (Senator Oshoko Samiat Oluwapelumi, Senator Adekanbi Illiyaz and Senator Abdussalaam Abidemi ABS)`;
+export const DESCRIPTIONS: string = `Mock Examination Portal created by Alabi Mubaraq Oladimeji (Mubzy) of Faculty of Engineering and Technology)`;
