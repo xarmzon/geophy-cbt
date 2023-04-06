@@ -4,15 +4,15 @@ import Image from "next/image";
 
 const Creators = () => {
   return (
-    <div className="">
+    <div className="flex flex-col space-y-8">
       <h3 className="text-center text-primary/90 font-bold">Created By</h3>
-      <div className="grid grid-cols-2 gap-5 justify-center">
+      <div className="flex items-center justify-center">
         {CREATORS.map((creator) => (
           <div
             key={creator.name}
             className="w-full flex flex-col justify-center items-center"
           >
-            <div className="relative overflow-hidden h-16 w-16 border-[3px] border-t-secondary border-l-primary  border-r-green-800 rounded-full">
+            <div className="relative overflow-hidden h-40 w-40 border-[3px] border-t-secondary border-l-primary  border-r-green-800 rounded-full">
               <Image
                 src={creator.avatar}
                 layout="fill"
@@ -20,7 +20,12 @@ const Creators = () => {
                 // className="object-contain"
               />
             </div>
-            <p className="text-center text-xs md:text-sm">{creator.name}</p>
+            <p className="text-center text-xl md:text-2xl font-bold">
+              {creator.name}
+            </p>
+            {creator.subText && (
+              <p className="text-center">{creator.subText}</p>
+            )}
           </div>
         ))}
       </div>

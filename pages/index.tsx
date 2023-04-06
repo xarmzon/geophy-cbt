@@ -24,14 +24,14 @@ const Home = ({ courses }) => {
   return (
     <div className="bg-senateBuilding bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center min-h-screen p-5">
       <NextSeo title="Home" />
-      <div className="mt-5 mb-1 w-full flex justify-center">
-        <Logo size="large" />
+      <div className="my-8 w-full flex justify-center">
+        {/* <Logo size="large" /> */}
       </div>
       <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
         <h1 className="text-center text-ascent md:text-lg pt-3">
           WELCOME TO <br />
           <span className="font-black text-primary text-2xl md:text-4xl inline-block pt-2">
-            NAPHSS SENATORS CBT MOCK TEST
+            MUBZY CBT MOCK TEST
             <br />
           </span>
         </h1>

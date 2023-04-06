@@ -119,18 +119,11 @@ export const MESSAGES = {
   },
 };
 
-export const CREATORS: { name: string; avatar: string }[] = [
+export const CREATORS: { name: string; avatar: string; subText?: string }[] = [
   {
-    name: "Senator Abdussalaam Abidemi ABS",
-    avatar: "/assets/images/abs.jpg",
-  },
-  {
-    name: "Senator Oshoko Samiat Oluwapelumi",
-    avatar: "/assets/images/samiat.jpg",
-  },
-  {
-    name: "Senator Adekanbi Illiyaz",
-    avatar: "/assets/images/illiyaz.jpg",
+    name: "Alabi Mubaraq Oladimeji(Mubzy)",
+    avatar: "/assets/images/mubzy.jpg",
+    subText: "Faculty of Engineering and Technology",
   },
 ];
 

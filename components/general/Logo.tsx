@@ -1,23 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export type SizeType = "small" | "large";
+export type SizeType = "small" | "large" | "text";
 export interface LogoProps {
   size?: SizeType;
   children?: React.ReactNode;
 }
-const Logo = ({ size = "small" }: LogoProps) => {
+const Logo = ({ size = "text" }: LogoProps) => {
   return (
-    <div className={`${size === "small" ? "h-16 w-16" : "h-40 w-52"}`}>
+    <div
+      className={`${
+        size === "small"
+          ? "h-16 w-16"
+          : size === "large"
+          ? "font-bold text-5xl text-white"
+          : "font-bold text-2xl text-white"
+      }`}
+    >
       <Link href="/">
-        <a>
-          <Image
-            className="object-contain"
-            src="/assets/images/logo.png"
-            height={`${size === "small" ? "310" : "610"}`}
-            width={`${size === "small" ? "310" : "610"}`}
-          />
-        </a>
+        <a>MubzyCBT</a>
       </Link>
     </div>
   );
