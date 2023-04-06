@@ -18,7 +18,7 @@ const Logo = ({ size = "text" }: LogoProps) => {
       }`}
     >
       <Link href="/">
-        <a>MubzyCBT</a>
+        <a>Mubzy Mock CBT</a>
       </Link>
     </div>
   );

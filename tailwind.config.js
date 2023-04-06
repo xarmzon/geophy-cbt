@@ -16,10 +16,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "hsl(112,99%,27%)",
-        "primary-light-50": "#ECFDF5",
-        "primary-light-100": "#D1FAE5",
-        "primary-deep": "#064E3B",
+        primary: "#89312d",
+        "primary-light-50": "#fceeed",
+        "primary-light-100": "#f7cbc9",
+        "primary-deep": "#732926",
         color1: "#0a0d46",
         secondary: colors.coolGray["700"],
         ascent: "#E25D00",
