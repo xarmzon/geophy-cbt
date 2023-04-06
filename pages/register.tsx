@@ -205,10 +205,12 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
             </span>
           </h1>
           <Creators />
-          <p className="!mt-8 text-sm text-center text-secondary">
-            In order to have access to the questions, please provide the details
-            below.
-          </p>
+          {!completed && (
+            <p className="!mt-8 text-sm text-center text-secondary">
+              In order to have access to the questions, please provide the
+              details below.
+            </p>
+          )}
 
           {loading ? (
             <h3 className="md:max-w-[90%] mx-auto !mt-5 md:!mt-14 text-xl text-gray-700 animate-pulse font-bold text-center">
