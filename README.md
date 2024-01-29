@@ -1,8 +1,8 @@
-# MSSN UNILORIN CHAPTER MOCK EXAMINATION CBT(Computer Base Test WebApp)
+# FACULTY OF PHARMACEUTICAL SCIENCES MOCK EXAMINATION CBT(Computer Base Test WebApp)
 
 ## Designed and Crafted By
 
-Xarmzon(Adelola Kayode Samson), A FullStack Developer using React, NextJs, VueJs, NuxtJs, MongoDB, Postgres, MySql, Flask, Python, Express, Node etc.
+Xarmzon(Adelola Kayode Samson), A FullStack Developer
 
 ## Stack used
 
