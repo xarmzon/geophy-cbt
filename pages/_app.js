@@ -66,6 +66,15 @@ function MyApp({ Component, pageProps }) {
         titleTemplate={`%s | ${APP_NAME}`}
         defaultTitle={APP_NAME}
         description={DESCRIPTIONS}
+        openGraph={{
+          images: [
+            {
+              url: "/ms-icon-310x310.png",
+              height: 310,
+              width: 310,
+            },
+          ],
+        }}
       />
       <SWRConfig
         value={{
