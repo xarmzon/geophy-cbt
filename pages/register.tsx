@@ -238,7 +238,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
                 </div>
               )}
               <form
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmit} TODO: ACTIVATE BACK
                 className="flex flex-col w-full space-y-3"
               >
                 <Input
