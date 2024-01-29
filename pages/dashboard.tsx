@@ -230,7 +230,7 @@ const Dashboard = () => {
                             </span>
                             <span className="space-x-3">
                               <span className="font-bold">
-                                Courses Selection:
+                                Courses Selected:
                               </span>{" "}
                               {d.courseSelections?.split(";")?.join(", ")}
                             </span>
