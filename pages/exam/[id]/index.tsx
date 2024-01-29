@@ -263,11 +263,13 @@ const ExamPage = ({
                                     op.value
                                   )
                                 }
+                                id={op.value}
                               />
-                              <span
+                              <label
+                                htmlFor={op.value}
                                 className=""
                                 dangerouslySetInnerHTML={{ __html: op.value }}
-                              ></span>
+                              ></label>
                             </li>
                           )
                         )}

@@ -155,11 +155,7 @@ const Dashboard = () => {
                       return {
                         primaryText: d.student.fullName,
                         secondaryText: (
-                          <span className="flex flex-col text-gray-500">
-                            <span className="space-x-2">
-                              <span className="font-bold">Course:</span>{" "}
-                              {d.course.title}
-                            </span>
+                          <span className="flex flex-col space-y-2 text-gray-500">
                             <span
                               className={`${
                                 (d.score / d.course.questionNum) * 100 >= 70
@@ -181,7 +177,18 @@ const Dashboard = () => {
                               )}
                               %
                             </span>
-
+                            <span className="space-x-3">
+                              <span className="font-bold">Course:</span>{" "}
+                              {d.course.title}
+                            </span>
+                            <span className="space-x-3">
+                              <span className="font-bold">Matric/Jamb:</span>{" "}
+                              {d.student?.jamb}
+                            </span>
+                            <span className="space-x-3">
+                              <span className="font-bold">Department:</span>{" "}
+                              {d.student?.department}
+                            </span>
                             <span>
                               <span className="font-bold">Date:</span>{" "}
                               {dateformat(d.createdAt, "mediumDate")}
@@ -208,10 +215,24 @@ const Dashboard = () => {
                       return {
                         primaryText: d.fullName,
                         secondaryText: (
-                          <span className="flex flex-col text-gray-500">
-                            <span className="space-x-2">
+                          <span className="flex flex-col space-y-2 text-gray-500">
+                            <span className="space-x-3">
                               <span className="font-bold">Phone:</span>{" "}
                               {d.phoneNumber}
+                            </span>
+                            <span className="space-x-3">
+                              <span className="font-bold">Matric/Jamb:</span>{" "}
+                              {d.jamb}
+                            </span>
+                            <span className="space-x-3">
+                              <span className="font-bold">Department:</span>{" "}
+                              {d.department}
+                            </span>
+                            <span className="space-x-3">
+                              <span className="font-bold">
+                                Courses Selection:
+                              </span>{" "}
+                              {d.courseSelections?.split(";")?.join(", ")}
                             </span>
                             <span>
                               <span className="font-bold">Joined On:</span>{" "}
