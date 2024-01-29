@@ -1,4 +1,4 @@
-export const APP_NAME: string = `Mubzy Mock CBT`;
+export const APP_NAME: string = `Pans University of Ilorin and Kikelomo Boys Mock CBT`;
 export const RASTAARC = {
   GITHUB: "https://www.github.com/xarmzon",
   TWITTER: "https://www.twitter.com/rastaarcl",
@@ -121,10 +121,10 @@ export const MESSAGES = {
 
 export const CREATORS: { name: string; avatar: string; subText?: string }[] = [
   {
-    name: "Alabi Mubaraq Oladimeji(Mubzy)",
-    avatar: "/assets/images/mubzy.jpg",
-    subText: "Faculty of Engineering and Technology",
+    name: "Pans University of Ilorin and Kikelomo Boys",
+    avatar: "/assets/images/logo.jpg",
+    subText: "",
   },
 ];
 
-export const DESCRIPTIONS: string = `Mock Examination Portal created by Alabi Mubaraq Oladimeji (Mubzy) of Faculty of Engineering and Technology)`;
+export const DESCRIPTIONS: string = `Mock Examination Portal created by Pans University of Ilorin and Kikelomo Boys for Faculty of Pharmaceutical Sciences`;

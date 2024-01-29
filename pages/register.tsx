@@ -14,6 +14,7 @@ import { IRegRes } from "../components/dashboard/AuthForm";
 import api from "../utils/fetcher";
 import { componentsErrors, errorMessage } from "../utils/errorHandler";
 import Creators from "../components/general/Creators";
+import Link from "next/link";
 
 export interface DataProps {
   error: string;
@@ -193,18 +194,19 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
     <>
       <NextSeo title="Students Registration" />
       <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-no-repeat bg-cover bg-senateBuilding bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm">
-        <div className="flex justify-center w-full mt-5 mb-1">
-          {/* <Logo size="large" /> */}
+        <div className="z-20 flex justify-center w-full mt-5 -mb-8 shadow-md max-w-max">
+          <Logo size="large" />
         </div>
-        <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
+        <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md pt-8">
           <h1 className="pt-3 text-center text-ascent md:text-lg">
             STUDENTS REGISTRATION <br />
             <span className="inline-block pt-2 text-2xl font-bold text-primary md:text-4xl">
-              MUBZY CBT MOCK TEST
+              {"Pans University of Ilorin and Kikelomo Boys".toUpperCase()} CBT
+              MOCK TEST
               <br />
             </span>
           </h1>
-          <Creators />
+          {/* <Creators /> */}
           {!completed && (
             <p className="!mt-8 text-sm text-center text-secondary">
               In order to have access to the questions, please provide the
@@ -218,7 +220,10 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
             </h3>
           ) : completed ? (
             <h3 className="md:max-w-[90%] mx-auto !mt-5 md:!mt-14 text-xl text-green-500 font-bold text-center">
-              Congratulations, your details has been captured successfully.
+              Congratulations, your details has been captured successfully.{" "}
+              <Link href="/">
+                <a className="text-yellow-500 underline">Homepage</a>
+              </Link>
             </h3>
           ) : noCourse ? (
             <h3 className="md:max-w-[90%] mx-auto !mt-5 md:!mt-14 text-xl text-red-600 font-bold text-center">

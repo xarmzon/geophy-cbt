@@ -22,20 +22,21 @@ const Home = ({ courses }) => {
       : [];
   });
   return (
-    <div className="bg-senateBuilding bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center min-h-screen p-5">
+    <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-no-repeat bg-cover bg-senateBuilding bg-primary bg-blend-multiply backdrop-filter backdrop-blur-sm">
       <NextSeo title="Home" />
-      <div className="my-8 w-full flex justify-center">
-        {/* <Logo size="large" /> */}
+      <div className="z-20 flex justify-center w-full mt-5 -mb-8 shadow-md max-w-max">
+        <Logo size="large" />
       </div>
-      <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
-        <h1 className="text-center text-ascent md:text-lg pt-3">
+      <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md pt-8">
+        <h1 className="pt-3 text-center text-ascent md:text-lg">
           WELCOME TO <br />
-          <span className="font-black text-primary text-2xl md:text-4xl inline-block pt-2">
-            MUBZY CBT MOCK TEST
+          <span className="inline-block pt-2 text-2xl font-black text-primary md:text-4xl">
+            {"Pans University of Ilorin and Kikelomo Boys".toUpperCase()} CBT
+            MOCK TEST
             <br />
           </span>
         </h1>
-        <Creators />
+        {/* <Creators /> */}
         <p className="!mt-12 text-sm text-center text-secondary">
           In order to have access to the questions, please provide the details
           below.
@@ -46,7 +47,7 @@ const Home = ({ courses }) => {
           />
         </p>
         <LoginForm courses={coursesData} />
-        <div className="mt-4 w-full text-center">
+        <div className="w-full mt-4 text-center">
           <LinkButton
             href={ROUTES.REGISTRATION}
             txt="Students Registration"
@@ -62,7 +63,7 @@ const Home = ({ courses }) => {
           />{" "}
         </div>
       </div>
-      <div className="text-gray-200 mt-6 max-w-md mx-auto text-center">
+      <div className="max-w-md mx-auto mt-6 text-center text-gray-200">
         <Footer />
       </div>
     </div>

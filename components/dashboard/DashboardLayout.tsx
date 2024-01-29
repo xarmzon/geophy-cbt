@@ -11,7 +11,7 @@ const DashboardLayout = (props) => {
     <div>
       <Header />
       <Sidebar />
-      <div className="mt-20 ml-7 p-5 text-secondary min-h-[400px]">
+      <div className="mt-20 ml-7 p-5 text-secondary min-h-[calc(100vh-170px)]">
         {auth.isLoading ? (
           <Loader type="book" />
         ) : auth.user ? (

@@ -6,7 +6,7 @@ import Logo from "../components/general/Logo";
 import { IRegRes } from "../components/dashboard/AuthForm";
 import Alert from "../components/general/Alert";
 import api from "../utils/fetcher";
-import { ROUTES } from "../utils/constants";
+import { APP_NAME, ROUTES } from "../utils/constants";
 import { errorMessage } from "../utils/errorHandler";
 
 interface IData {
@@ -80,8 +80,10 @@ const ResultChecker = () => {
     <>
       <NextSeo title="Results Checker" />
       <div className="bg-book bg-no-repeat bg-cover bg-primary bg-blend-multiply backdrop-filter backdrop-blur-[3px] flex flex-col items-center justify-center min-h-screen p-5">
-        <Logo size="large" />
-        <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md">
+        <div className="z-20 flex justify-center w-full mt-5 -mb-8 shadow-md max-w-max">
+          <Logo size="large" />
+        </div>
+        <div className="text-primary space-y-4 w-full max-w-lg min-h-[300px] bg-gray-50 bg-opacity-95 backdrop-filter backdrop-blur-sm p-5 rounded-md pt-8">
           <h1 className="text-center text-primary text-xl font-bold pt-3 mb-2">
             Check My Results
           </h1>
@@ -115,7 +117,7 @@ const ResultChecker = () => {
           {resultsData && submitText !== "Loading..." && (
             <div className="overflow-x-auto mt-10">
               <h1 className="text-lg px-3 font-bold text-center mb-4">
-                NAPHSS Mock Exam Results Notification
+                {APP_NAME} Results Notification
               </h1>
               <div className="px-3">
                 <div className="text-secondary space-y-2 mb-5">
