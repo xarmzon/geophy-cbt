@@ -4,7 +4,7 @@ import Footer from "../components/general/Footer";
 import LinkButton, { ETypes } from "../components/general/LinkButton";
 import LoginForm from "../components/home/LoginForm";
 import Course from "../models/CourseModel";
-import { ROUTES } from "../utils/constants";
+import { APP_NAME, ROUTES } from "../utils/constants";
 import { connectDB } from "../utils/database";
 import { SelectOptionProps } from "../components/controls/Select";
 import { useState } from "react";
@@ -31,8 +31,7 @@ const Home = ({ courses }) => {
         <h1 className="pt-3 text-center text-ascent md:text-lg">
           WELCOME TO <br />
           <span className="inline-block pt-2 text-2xl font-black text-primary md:text-4xl">
-            {"Pans University of Ilorin and Kikelomo Boys".toUpperCase()} CBT
-            MOCK TEST
+            {APP_NAME.toUpperCase()} TEST
             <br />
           </span>
         </h1>

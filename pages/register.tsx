@@ -201,8 +201,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
           <h1 className="pt-3 text-center text-ascent md:text-lg">
             STUDENTS REGISTRATION <br />
             <span className="inline-block pt-2 text-2xl font-bold text-primary md:text-4xl">
-              {"Pans University of Ilorin and Kikelomo Boys".toUpperCase()} CBT
-              MOCK TEST
+              {APP_NAME.toUpperCase()} TEST
               <br />
             </span>
           </h1>
