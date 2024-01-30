@@ -242,9 +242,6 @@ const ExamPage = ({
                               key={i + +op.answer + currentPosition + op.value}
                               className="space-x-3 flex items-center"
                             >
-                              {/* <span className="">
-                            {String.fromCharCode(i + 65)}
-                          </span> */}
                               <input
                                 className="text-primary"
                                 name="answer"
