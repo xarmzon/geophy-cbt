@@ -21,7 +21,7 @@ const Logo = ({ size = "small" }: LogoProps) => {
           }`}
         >
           <Image
-            src={"/assets/images/logo.jpg"}
+            src={"/assets/images/logo.png"}
             layout="fill"
             alt={APP_NAME}
             className="object-contain"

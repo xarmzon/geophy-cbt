@@ -16,14 +16,14 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#07913C",
-        "primary-light-50": "#fceeed",
-        "primary-light-100": "#f7cbc9",
-        "primary-deep": "#732926",
+        primary: "#251868",
+        "primary-light-50": "#FDEAA0",
+        "primary-light-100": "#FEF6D7",
+        "primary-deep": "#1C124F",
         color1: "#0a0d46",
         secondary: colors.coolGray["700"],
-        ascent: "#E25D00",
-        "ascent-light": "#e58546",
+        ascent: "#9C8653",
+        "ascent-light": "#C8BA98",
       },
       fontFamily: {
         brand: ["nunito", "helvetica", "sans-serif"],

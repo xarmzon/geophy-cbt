@@ -56,7 +56,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
     },
     department: {
       error: "",
-      value: "",
+      value: "Geophysics",
     },
     phoneNumber: {
       error: "",
@@ -272,7 +272,7 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
                   error={formData.department.error}
                   showLabel
                   labelValue="Department"
-                  placeholder="E.g Mathematics"
+                  placeholder="E.g Geophysics"
                   onChange={(e) => {
                     handleChange(e.target.name, e.target.value);
                   }}
