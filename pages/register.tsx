@@ -114,7 +114,10 @@ const RegisterPage = ({ courses }: RegisterPageProps) => {
     if (!validJAMB(formData.jamb.value)) {
       setFormData((prev) => ({
         ...prev,
-        jamb: { ...prev.jamb, error: "Please enter a valid JAMB number" },
+        jamb: {
+          ...prev.jamb,
+          error: "Please enter a valid JAMB number/Matric No",
+        },
       }));
       return;
     }

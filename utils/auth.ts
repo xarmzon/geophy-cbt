@@ -43,8 +43,10 @@ export const validateRegForm = (formData: IRegUser): IDataError[] => {
   return errors;
 };
 
-export const validJAMB = (jambN: string): boolean => {
-  return /^\d{8}[a-zA-Z]{2}$/.test(jambN);
+export const validJAMB = (data: string): boolean => {
+  const isJamb = /^\d{8}[a-zA-Z]{2}$/.test(data);
+  const isMatric = /^\d{2}\/\d{2}\w{2}\d{3}$/.test(data);
+  return isJamb || isMatric;
 };
 
 export const validPhoneNumber = (phone: string): boolean => {
@@ -52,7 +54,7 @@ export const validPhoneNumber = (phone: string): boolean => {
   //return /^(080|070|081|031|090|091|071)\d{8}$/.test(phone);
 };
 export const validFullName = (fullname: string): boolean => {
-  return /^[a-zA-Z][a-zA-Z\s]{6,50}$/.test(fullname);
+  return /^[a-zA-Z][a-zA-Z\s]{6,150}$/.test(fullname);
 };
 
 export const validUsername = (username: string): boolean => {
